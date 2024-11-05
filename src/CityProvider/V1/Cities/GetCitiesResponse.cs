@@ -1,4 +1,4 @@
-﻿using CityProvider.V1.Models;
+﻿using Clients.V1.Models;
 
 namespace CityProvider.V1.Cities;
 

@@ -12,4 +12,8 @@
       <PackageReference Include="MinimalApi.Endpoint" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\AspireProjects\ServiceDefaults\ServiceDefaults.csproj" />
+  </ItemGroup>
+
 </Project>
