@@ -1,0 +1,6 @@
+{
+    "$schema": "https://raw.githubusercontent.com/SimonCropp/MarkdownSnippets/master/schema.json",
+    "Convention": "InPlaceOverwrite",
+    "ExcludeDirectories": [ ".vs" ],
+    "UrlPrefix": "https://github.com/functario/Pact-demo-csharp/tree/main"
+  }
