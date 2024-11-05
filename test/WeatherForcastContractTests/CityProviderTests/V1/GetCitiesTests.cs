@@ -39,7 +39,7 @@ public class GetCitiesTests
         _pactBuilder
             .UponReceiving("GetCities")
                 .Given("Some cities exist")
-                .WithRequest(HttpMethod.Get, "/v1/cities")
+                .WithRequest(HttpMethod.Get, $"/{_cityProviderClient.CitiesEndPoint}")
                 .WithHeader("Accept", "application/json")
             .WillRespond()
                 .WithStatus(HttpStatusCode.OK)
