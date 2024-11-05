@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CityProvider\CityProvider.csproj" />
-    <ProjectReference Include="..\WeatherForcast\WeatherForcast.csproj" />
+    <ProjectReference Include="..\..\src\CityProvider\CityProvider.csproj" />
+    <ProjectReference Include="..\..\src\WeatherForcast\WeatherForcast.csproj" />
   </ItemGroup>
 
 </Project>
