@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using CityProvider.Routes;
+﻿using CityProvider.Routes;
 using MinimalApi.Endpoint;
 
 namespace CityProvider.V1.Cities;

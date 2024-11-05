@@ -1,4 +1,4 @@
-﻿using WeatherForcast.V1.Forcasts.DTOs;
+﻿using WeatherForcast.V1.Forcasts.Models;
 
 namespace WeatherForcast.V1.Forcasts.GetForcast;
 
