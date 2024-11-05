@@ -29,6 +29,9 @@
     <PackageVersion Include="FluentAssertions" Version="6.12.1" />
     <PackageVersion Include="Xunit.DependencyInjection" Version="9.6.0" />
     <PackageVersion Include="PactNet" Version="5.0.0" />
+    <PackageVersion Include="PactNet.Output.Xunit" Version="1.0.0" />
+    <PackageVersion Include="PactNet.Abstractions" Version="5.0.0" />
+    <PackageVersion Include="FluentAssertions.Json" Version="6.1.0" />
   </ItemGroup>
 
   <!--Apply format code with csharpier-->

@@ -18,7 +18,7 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        return services.AddCityProviderClient();
+        return services.AddCityProviderClient().AddPactConfiguration();
     }
 
     public static IServiceCollection AddCityProviderClient(this IServiceCollection services)
@@ -27,6 +27,15 @@ internal static class ServiceCollectionExtensions
         {
             c.BaseAddress = new Uri(Constants.CityProviderBaseAddress);
         });
+
+        return services;
+    }
+
+    public static IServiceCollection AddPactConfiguration(this IServiceCollection services)
+    {
+        services.AddSingleton(
+            new PactConfig() { PactDir = Constants.PactDir, LogLevel = PactLogLevel.Error }
+        );
 
         return services;
     }
