@@ -10,25 +10,17 @@ using System.Diagnostics.CodeAnalysis;
     "CA2007:Consider calling ConfigureAwait on the awaited task",
     Justification = "Not production code"
 )]
-
 [assembly: SuppressMessage(
-    "Naming",
-    "CA1725:Parameter names should match base declaration",
-    Justification = "Not production code",
-    Scope = "namespaceanddescendants",
-    Target = "~N:WeatherForcast.V1"
+    "Design",
+    "CA1024:Use properties where appropriate",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:DemoConfiguration.Configurations.DemoConfiguration.GetJsonSerializerOptions~System.Text.Json.JsonSerializerOptions"
 )]
 [assembly: SuppressMessage(
     "Naming",
     "CA1707:Identifiers should not contain underscores",
     Justification = "Allowed for environment variables",
     Scope = "type",
-    Target = "~T:WeatherForcast.Configurations.EnvironmentVars"
-)]
-[assembly: SuppressMessage(
-    "Design",
-    "CA1024:Use properties where appropriate",
-    Justification = "<Pending>",
-    Scope = "member",
-    Target = "~M:WeatherForcast.Configurations.DemoConfiguration.GetJsonSerializerOptions~System.Text.Json.JsonSerializerOptions"
+    Target = "~T:DemoConfigurations.EnvironmentVars"
 )]

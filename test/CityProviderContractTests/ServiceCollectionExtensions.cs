@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CityProvider;
 using CityProviderContractTests.Middleware;
+using DemoConfigurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -24,6 +25,7 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
+        services.AddSingleton(_ => new DemoConfiguration(context.Configuration));
         return services.AddCityProviderService();
     }
 

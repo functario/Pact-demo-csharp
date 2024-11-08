@@ -32,6 +32,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidersPactStates", "test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureProvider", "src\TemperatureProvider\TemperatureProvider.csproj", "{76DADF2E-B141-40B3-9960-2646961E470D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B7D87FB5-427D-4FE4-94A6-E35B5FEA1877}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoConfigurations", "src\Shared\DemoConfigurations\DemoConfigurations.csproj", "{EE36A974-48E9-47B1-9BA0-F9C7C74ACC62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +74,10 @@ Global
 		{76DADF2E-B141-40B3-9960-2646961E470D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76DADF2E-B141-40B3-9960-2646961E470D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76DADF2E-B141-40B3-9960-2646961E470D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE36A974-48E9-47B1-9BA0-F9C7C74ACC62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE36A974-48E9-47B1-9BA0-F9C7C74ACC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE36A974-48E9-47B1-9BA0-F9C7C74ACC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE36A974-48E9-47B1-9BA0-F9C7C74ACC62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +91,8 @@ Global
 		{62B3D0CA-21E1-4E61-B032-A2BC6E20B521} = {4D21B2A1-8B90-48D3-9D49-7C48B81AE481}
 		{8EB047FC-5994-44E1-B50F-C27EC0B4111E} = {4D21B2A1-8B90-48D3-9D49-7C48B81AE481}
 		{76DADF2E-B141-40B3-9960-2646961E470D} = {575244E4-337F-45C4-886E-0CC27F8F892A}
+		{B7D87FB5-427D-4FE4-94A6-E35B5FEA1877} = {575244E4-337F-45C4-886E-0CC27F8F892A}
+		{EE36A974-48E9-47B1-9BA0-F9C7C74ACC62} = {B7D87FB5-427D-4FE4-94A6-E35B5FEA1877}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BDAD170-243C-4FCA-95DE-59B8960AD6A8}

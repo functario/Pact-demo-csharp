@@ -1,5 +1,8 @@
 ﻿using System.Net.Http;
 using System.Text.Json;
+using DemoConfigurations;
+using Microsoft.Extensions.Options;
+using WeatherForcast.Clients.CityProvider.V1;
 using WeatherForcast.Clients.TemperatureProvider.V1.DTOs;
 
 namespace WeatherForcast.Clients.TemperatureProvider.V1;
@@ -9,14 +12,12 @@ public sealed class TemperatureProviderClient : ITemperatureProviderClient
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public TemperatureProviderClient(HttpClient httpClient)
+    public TemperatureProviderClient(HttpClient httpClient, DemoConfiguration demoConfiguration)
     {
+        ArgumentNullException.ThrowIfNull(httpClient, nameof(httpClient));
+        ArgumentNullException.ThrowIfNull(demoConfiguration, nameof(demoConfiguration));
         _httpClient = httpClient;
-        _jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            PropertyNameCaseInsensitive = false,
-        };
+        _jsonSerializerOptions = demoConfiguration.GetJsonSerializerOptions();
     }
 
     public string TemperaturesEndPoint => "v1/temperatures";
@@ -36,7 +37,7 @@ public sealed class TemperatureProviderClient : ITemperatureProviderClient
 
         var temperatures = await response.Content.ReadFromJsonAsync<GetTemperaturesResponse>(
             _jsonSerializerOptions,
-            cancellationToken: cancellationToken
+            cancellationToken
         );
 
         return temperatures ?? new GetTemperaturesResponse([]);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DemoConfigurations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PactNet;
@@ -18,6 +19,7 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
+        services.AddSingleton(_ => new DemoConfiguration(context.Configuration));
         return services.AddCityProviderClient().AddPactConfiguration();
     }
 

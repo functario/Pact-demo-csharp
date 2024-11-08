@@ -1,4 +1,6 @@
-﻿using MinimalApi.Endpoint.Extensions;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using MinimalApi.Endpoint.Extensions;
 
 namespace TemperatureProvider;
 
@@ -17,6 +19,16 @@ public static class ServiceCollectionExtensions
 
     internal static IServiceCollection AddMinimalApi(this IServiceCollection services)
     {
+        services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
+            options.SerializerOptions.WriteIndented = true;
+            options.SerializerOptions.IncludeFields = true;
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            options.SerializerOptions.PropertyNameCaseInsensitive = true;
+            options.SerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
+        });
+
         return services.AddEndpointsApiExplorer().AddSwaggerGen().AddEndpoints();
     }
 }

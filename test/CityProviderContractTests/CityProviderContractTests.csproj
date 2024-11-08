@@ -18,15 +18,23 @@
           <PackageReference Include="xunit.runner.visualstudio" />
           <PackageReference Include="PactNet" />
           <PackageReference Include="PactNet.Output.Xunit" />
+          <PackageReference Include="dotenv.net" />
       </ItemGroup>
 
       <ItemGroup>
         <ProjectReference Include="..\..\src\CityProvider\CityProvider.csproj" />
+        <ProjectReference Include="..\..\src\Shared\DemoConfigurations\DemoConfigurations.csproj" />
         <ProjectReference Include="..\ProvidersPactStates\ProvidersPactStates.csproj" />
       </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
