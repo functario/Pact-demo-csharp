@@ -15,5 +15,12 @@ using System.Diagnostics.CodeAnalysis;
     "CA1707:Identifiers should not contain underscores",
     Justification = "Test nomenclature",
     Scope = "namespaceanddescendants",
-    Target = "~N:WeatherForcastContractTests"
+    Target = "~N:CityProviderContractTests"
+)]
+[assembly: SuppressMessage(
+    "Reliability",
+    "CA2000:Dispose objects before losing scope",
+    Justification = "Instance disposed by Xunit.DependencyInjection",
+    Scope = "member",
+    Target = "~M:CityProviderContractTests.ServiceCollectionExtensions.AddCityProviderService(Microsoft.Extensions.DependencyInjection.IServiceCollection)~Microsoft.Extensions.DependencyInjection.IServiceCollection"
 )]
