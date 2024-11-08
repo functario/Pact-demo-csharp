@@ -1,6 +1,7 @@
 <Project>
   <PropertyGroup>
     <SdkTargetFramework>net8.0</SdkTargetFramework>
+    <CopyToBinFolder>true</CopyToBinFolder>
     <AnalysisLevel>latest</AnalysisLevel>
     <AnalysisMode>All</AnalysisMode>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -8,6 +9,20 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+
+  <Target Name="CopyFilesToProjectRoot" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <EnFile Include="$(MSBuildThisFileDirectory).env" />
+    </ItemGroup>
+    <Copy SourceFiles="@(EnFile)" DestinationFolder="$(MSBuildProjectDirectory)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopyFilesToBin" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <EnFile Include="$(MSBuildThisFileDirectory).env" />
+    </ItemGroup>
+    <Copy SourceFiles="@(EnFile)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+  </Target>
 
   <ItemGroup>
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
