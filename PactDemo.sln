@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityProviderContractTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidersPactStates", "test\ProvidersPactStates\ProvidersPactStates.csproj", "{8EB047FC-5994-44E1-B50F-C27EC0B4111E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureProvider", "src\TemperatureProvider\TemperatureProvider.csproj", "{76DADF2E-B141-40B3-9960-2646961E470D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{8EB047FC-5994-44E1-B50F-C27EC0B4111E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EB047FC-5994-44E1-B50F-C27EC0B4111E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EB047FC-5994-44E1-B50F-C27EC0B4111E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76DADF2E-B141-40B3-9960-2646961E470D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76DADF2E-B141-40B3-9960-2646961E470D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76DADF2E-B141-40B3-9960-2646961E470D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76DADF2E-B141-40B3-9960-2646961E470D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{FD855778-252A-48F7-998E-D8B2B91004C0} = {6521E5A4-D661-43C7-A837-BAF2BC7048BA}
 		{62B3D0CA-21E1-4E61-B032-A2BC6E20B521} = {4D21B2A1-8B90-48D3-9D49-7C48B81AE481}
 		{8EB047FC-5994-44E1-B50F-C27EC0B4111E} = {4D21B2A1-8B90-48D3-9D49-7C48B81AE481}
+		{76DADF2E-B141-40B3-9960-2646961E470D} = {575244E4-337F-45C4-886E-0CC27F8F892A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BDAD170-243C-4FCA-95DE-59B8960AD6A8}
