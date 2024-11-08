@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{0220722F-6E6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA73E33D-16C0-497A-9196-5684A6272E47}"
 	ProjectSection(SolutionItems) = preProject
+		.env = .env
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject

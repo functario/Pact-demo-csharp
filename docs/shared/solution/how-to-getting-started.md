@@ -19,4 +19,11 @@ Open the solution [PactDemo.sln](../../../) from your C# ide.
 
 ## 3. Build the solution
 
-From here you should be able to build the solution inside your C# ide.
+1. Modify the [.env](../../../.env) file to the demo case corresponding (see [ref-demo-environment](./ref-demo-environment.md)).
+2. To ensure to update all .env file copies, clean and rebuild the solution.
+
+## 3. Start API projects
+
+1. Select the project "[AppHost](../../../AspireProjects/AppHost/)" as starting project.
+2. Start the project.
+3. Follow the Aspire instruction to login to the dashboard.
