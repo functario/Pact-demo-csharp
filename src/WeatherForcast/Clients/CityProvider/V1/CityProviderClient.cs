@@ -1,7 +1,5 @@
-﻿using System.Net.Http;
-using System.Text.Json;
+﻿using System.Text.Json;
 using DemoConfigurations;
-using Microsoft.Extensions.Options;
 using WeatherForcast.Clients.CityProvider.V1.DTOs;
 
 namespace WeatherForcast.Clients.CityProvider.V1;

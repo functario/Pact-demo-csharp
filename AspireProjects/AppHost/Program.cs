@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.Xml;
-using Microsoft.AspNetCore.Builder;
-using Projects;
+﻿using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
 

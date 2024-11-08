@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using DemoConfigurations;
-using Microsoft.Extensions.DependencyInjection;
+﻿using DemoConfigurations;
 using MinimalApi.Endpoint.Extensions;
 using WeatherForcast.Clients.CityProvider.V1;
 using WeatherForcast.Clients.TemperatureProvider.V1;

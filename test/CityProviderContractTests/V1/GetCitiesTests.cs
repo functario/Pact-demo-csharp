@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using PactNet;
-using PactNet.Infrastructure.Outputters;
-using PactNet.Output.Xunit;
 using PactNet.Verifier;
-using Xunit;
 using Xunit.Abstractions;
-using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
 
 namespace CityProviderContractTests.V1;
 
