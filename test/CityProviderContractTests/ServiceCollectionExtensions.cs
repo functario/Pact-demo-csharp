@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CityProvider;
-using CityProviderContractTests.Middleware;
+﻿using CityProviderContractTests.Middleware;
+using DemoConfigurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PactNet;
-using PactNet.Output.Xunit;
 using CityProviderStartup = CityProvider.Startup;
 
 namespace CityProviderContractTests;
@@ -24,6 +16,7 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
+        services.AddSingleton(_ => new DemoConfiguration(context.Configuration));
         return services.AddCityProviderService();
     }
 

@@ -16,4 +16,10 @@
       <ProjectReference Include="..\..\AspireProjects\ServiceDefaults\ServiceDefaults.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update=".env">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

@@ -1,5 +1,5 @@
-﻿using System.Net.Http;
-using System.Text.Json;
+﻿using System.Text.Json;
+using DemoConfigurations;
 using WeatherForcast.Clients.CityProvider.V1.DTOs;
 
 namespace WeatherForcast.Clients.CityProvider.V1;
@@ -9,14 +9,12 @@ public sealed class CityProviderClient : ICityProviderClient
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public CityProviderClient(HttpClient httpClient)
+    public CityProviderClient(HttpClient httpClient, DemoConfiguration demoConfiguration)
     {
+        ArgumentNullException.ThrowIfNull(httpClient, nameof(httpClient));
+        ArgumentNullException.ThrowIfNull(demoConfiguration, nameof(demoConfiguration));
         _httpClient = httpClient;
-        _jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            PropertyNameCaseInsensitive = false,
-        };
+        _jsonSerializerOptions = demoConfiguration.GetJsonSerializerOptions();
     }
 
     public string CitiesEndPoint => "v1/cities";
@@ -34,11 +32,9 @@ public sealed class CityProviderClient : ICityProviderClient
         var response = await _httpClient.SendAsync(request, cancellationToken);
         response.EnsureSuccessStatusCode();
 
-        var a = await response.Content.ReadAsStringAsync(cancellationToken);
-
         var cities = await response.Content.ReadFromJsonAsync<GetCitiesResponse>(
             _jsonSerializerOptions,
-            cancellationToken: cancellationToken
+            cancellationToken
         );
 
         return cities ?? new GetCitiesResponse([]);

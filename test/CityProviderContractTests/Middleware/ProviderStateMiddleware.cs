@@ -2,8 +2,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using PactNet;
-using PactNet.Verifier;
 using ProvidersPactStates;
 
 //using ProvidersPactStates;

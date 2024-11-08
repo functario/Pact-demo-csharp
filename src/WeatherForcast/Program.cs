@@ -1,4 +1,5 @@
-﻿using MinimalApi.Endpoint.Extensions;
+﻿using dotenv.net;
+using MinimalApi.Endpoint.Extensions;
 using WeatherForcast;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Logging.ClearProviders();
+
+// Load appsettings and environment variables.
+DotEnv.Fluent().WithTrimValues().WithOverwriteExistingVars().Load();
+builder.Configuration.AddJsonFile($"appsettings.json", optional: false).AddEnvironmentVariables();
 
 // Register Services
 builder.Host.ConfigureServices((context, services) => services.AddWeatherForcast(context));

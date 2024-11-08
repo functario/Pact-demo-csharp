@@ -1,9 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 using PactNet;
-using PactNet.Infrastructure.Outputters;
 using PactNet.Matchers;
 using PactNet.Output.Xunit;
 using ProvidersPactStates;
