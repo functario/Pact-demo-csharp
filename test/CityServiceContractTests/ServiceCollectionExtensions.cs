@@ -1,4 +1,5 @@
-﻿using CityServiceContractTests.Middlewares;
+﻿using CityService.Repositories;
+using CityServiceContractTests.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,11 @@ internal static class ServiceCollectionExtensions
 
     public static IServiceCollection AddCityService(this IServiceCollection services)
     {
-        var server = CityServiceStartup.WebApp([]);
+        services.AddScoped<ICityRepository>(_ => new FakeCityRepository());
+        var server = CityServiceStartup.WebApp(
+            [],
+            services.BuildServiceProvider().GetRequiredService<ICityRepository>()
+        );
         // To handle pact states.
         server.UseMiddleware<ProviderStateMiddleware>();
         server.Start();

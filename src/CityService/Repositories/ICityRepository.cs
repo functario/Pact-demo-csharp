@@ -4,5 +4,5 @@ namespace CityService.Repositories;
 
 public interface ICityRepository
 {
-    Task<ICollection<City>> GetCities();
+    Task<ICollection<City>> GetCities(CancellationToken cancellationToken);
 }

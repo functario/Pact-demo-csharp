@@ -26,8 +26,8 @@
             "temperatures": [
               {
                 "location": {
-                  "city_name": "Paris",
-                  "country": "France",
+                  "city_name": "New York",
+                  "country": "USA",
                   "geo_coordinate": {
                     "altitude": -0.3757,
                     "latitude": 48.8575,
@@ -40,12 +40,12 @@
               },
               {
                 "location": {
-                  "city_name": "Melbourne",
-                  "country": "Australia",
+                  "city_name": "Seoul",
+                  "country": "South Korea",
                   "geo_coordinate": {
-                    "altitude": 0.0778,
-                    "latitude": -37.840935,
-                    "longitude": 144.946457
+                    "altitude": -0.3757,
+                    "latitude": 48.8575,
+                    "longitude": 2.3514
                   }
                 },
                 "record_date": "2025-12-27T13:55:18+00:00",

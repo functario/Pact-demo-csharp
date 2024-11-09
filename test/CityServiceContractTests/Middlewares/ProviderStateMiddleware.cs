@@ -1,23 +1,29 @@
 ﻿using System.Net;
 using System.Text;
+using CityService.Repositories;
+using CityService.V1.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using PactReferences;
 using PactReferences.ProviderStates;
-
-//using ProvidersPactStates;
 
 namespace CityServiceContractTests.Middlewares;
 
 public sealed class ProviderStateMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly FakeCityRepository _cityRepository;
     private readonly IDictionary<string, Action> _providerStates;
     internal const string ProviderStatesPath = "provider-states";
 
-    public ProviderStateMiddleware(RequestDelegate next)
+    public ProviderStateMiddleware(RequestDelegate next, ICityRepository cityRepository)
     {
         _next = next;
+        _cityRepository =
+            cityRepository as FakeCityRepository
+            ?? throw new InvalidCastException(
+                $"Could not cast {nameof(cityRepository)} to {nameof(FakeCityRepository)}."
+            );
 
         // Map state with Actions
         _providerStates = new Dictionary<string, Action>
@@ -28,7 +34,14 @@ public sealed class ProviderStateMiddleware
 
     private void Create3Cities()
     {
-        // TODO: implement repository.
+        var cities = new List<City>()
+        {
+            new("Tokyo", "Japan"),
+            new("Nairobi", "Kenya"),
+            new("Seoul", "South Korea")
+        };
+
+        _cityRepository.DataSetCities.AddRange(cities);
     }
 
     public async Task Invoke(HttpContext context)

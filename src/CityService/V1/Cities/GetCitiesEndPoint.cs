@@ -30,9 +30,9 @@ public sealed class GetCitiesEndpoint : IEndpoint<IResult, CancellationToken>
         ;
     }
 
-    public async Task<IResult> HandleAsync(CancellationToken _)
+    public async Task<IResult> HandleAsync(CancellationToken cancellationToken)
     {
-        var cities = await _cityRepository.GetCities();
+        var cities = await _cityRepository.GetCities(cancellationToken);
         var response = new GetCitiesResponse(cities);
         return TypedResults.Ok(response);
     }

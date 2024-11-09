@@ -1,4 +1,5 @@
-﻿using MinimalApi.Endpoint.Extensions;
+﻿using CityService.Repositories;
+using MinimalApi.Endpoint.Extensions;
 using ServiceDefaults;
 
 namespace CityService;
@@ -10,7 +11,10 @@ namespace CityService;
 )]
 public class Startup
 {
-    public static WebApplication WebApp(string[] args)
+    public static WebApplication WebApp(
+        string[] args,
+        ICityRepository? injectedCityRepository = null
+    )
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +29,9 @@ public class Startup
         builder.Logging.ClearProviders();
 
         // Register Services
-        builder.Host.ConfigureServices((context, services) => services.AddCityService(context));
+        builder.Host.ConfigureServices(
+            (context, services) => services.AddCityService(context, injectedCityRepository)
+        );
 
         var app = builder.Build();
 
