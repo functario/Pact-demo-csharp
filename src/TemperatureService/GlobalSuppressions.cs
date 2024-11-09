@@ -10,13 +10,12 @@ using System.Diagnostics.CodeAnalysis;
     "CA2007:Consider calling ConfigureAwait on the awaited task",
     Justification = "Not production code"
 )]
-
 [assembly: SuppressMessage(
     "Naming",
     "CA1725:Parameter names should match base declaration",
     Justification = "Not production code",
     Scope = "namespaceanddescendants",
-    Target = "~N:WeatherForcast.V1"
+    Target = "~N:TemperatureService.V1"
 )]
 [assembly: SuppressMessage(
     "Style",

@@ -1,7 +1,7 @@
 ﻿using DemoConfigurations;
 using MinimalApi.Endpoint.Extensions;
-using WeatherForcast.Clients.CityProvider.V1;
-using WeatherForcast.Clients.TemperatureProvider.V1;
+using WeatherForcast.Clients.CityService.V1;
+using WeatherForcast.Clients.TemperatureService.V1;
 
 namespace WeatherForcast;
 
@@ -53,14 +53,14 @@ public static class ServiceCollectionExtensions
     {
         var jsonSerializerOptions = s_demoConfiguration.GetJsonSerializerOptions();
         services.AddHttpClient();
-        services.AddHttpClient<ICityProviderClient, CityProviderClient>(c =>
+        services.AddHttpClient<ICityServiceClient, CityServiceClient>(c =>
         {
-            c.BaseAddress = new Uri($"https+http://{"cityprovider"}");
+            c.BaseAddress = new Uri($"https+http://{"cityservice"}");
         });
 
         services.AddHttpClient<ITemperatureProviderClient, TemperatureProviderClient>(c =>
         {
-            c.BaseAddress = new Uri($"https+http://{"temperatureprovider"}");
+            c.BaseAddress = new Uri($"https+http://{"temperatureservice"}");
         });
 
         return services;

@@ -1,5 +1,6 @@
 ﻿using dotenv.net;
 using MinimalApi.Endpoint.Extensions;
+using ServiceDefaults;
 using WeatherForcast;
 
 var builder = WebApplication.CreateBuilder(args);

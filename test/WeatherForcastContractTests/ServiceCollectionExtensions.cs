@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PactNet;
-using WeatherForcast.Clients.CityProvider.V1;
+using WeatherForcast.Clients.CityService.V1;
 
 namespace WeatherForcastContractTests;
 
@@ -15,14 +15,14 @@ internal static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
         services.AddSingleton(_ => new DemoConfiguration(context.Configuration));
-        return services.AddCityProviderClient().AddPactConfiguration();
+        return services.AddCityServiceClient().AddPactConfiguration();
     }
 
-    public static IServiceCollection AddCityProviderClient(this IServiceCollection services)
+    public static IServiceCollection AddCityServiceClient(this IServiceCollection services)
     {
-        services.AddHttpClient<ICityProviderClient, CityProviderClient>(c =>
+        services.AddHttpClient<ICityServiceClient, CityServiceClient>(c =>
         {
-            c.BaseAddress = new Uri(Constants.CityProviderBaseAddress);
+            c.BaseAddress = new Uri(Constants.CityServiceBaseAddress);
         });
 
         return services;

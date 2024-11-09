@@ -10,13 +10,19 @@ using System.Diagnostics.CodeAnalysis;
     "CA2007:Consider calling ConfigureAwait on the awaited task",
     Justification = "Not production code"
 )]
-
 [assembly: SuppressMessage(
     "Naming",
-    "CA1725:Parameter names should match base declaration",
-    Justification = "Not production code",
+    "CA1707:Identifiers should not contain underscores",
+    Justification = "Test nomenclature",
     Scope = "namespaceanddescendants",
-    Target = "~N:WeatherForcast.V1"
+    Target = "~N:CityServiceContractTests"
+)]
+[assembly: SuppressMessage(
+    "Reliability",
+    "CA2000:Dispose objects before losing scope",
+    Justification = "Instance disposed by Xunit.DependencyInjection",
+    Scope = "member",
+    Target = "~M:CityServiceContractTests.ServiceCollectionExtensions.AddCityServiceService(Microsoft.Extensions.DependencyInjection.IServiceCollection)~Microsoft.Extensions.DependencyInjection.IServiceCollection"
 )]
 [assembly: SuppressMessage(
     "Style",
