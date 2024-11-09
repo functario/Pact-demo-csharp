@@ -3,7 +3,7 @@ using FluentAssertions;
 using PactNet;
 using PactNet.Matchers;
 using PactNet.Output.Xunit;
-using ProvidersPactStates;
+using PactReferences;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.CityService.V1.DTOs;
 using WeatherForcast.Clients.CityService.V1.Models;
@@ -25,7 +25,7 @@ public class GetCitiesTests
         ArgumentNullException.ThrowIfNull(pactConfig, nameof(pactConfig));
         pactConfig.Outputters = [new XunitOutput(output)];
 
-        var pact = Pact.V4(References.WeatherForcast, References.CityService, pactConfig);
+        var pact = Pact.V4(Participants.WeatherForcast, Participants.CityService, pactConfig);
 
         // Initialize Rust backend
         _pactBuilder = pact.WithHttpInteractions(port: Constants.CityServicePort);

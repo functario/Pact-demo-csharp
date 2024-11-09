@@ -1,6 +1,6 @@
-﻿namespace ProvidersPactStates;
+﻿namespace PactReferences;
 
-public static class References
+public static class Participants
 {
     public const string WeatherForcast = "WeatherForcast";
     public const string CityService = "CityService";

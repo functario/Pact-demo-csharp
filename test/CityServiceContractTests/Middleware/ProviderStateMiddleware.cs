@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using ProvidersPactStates;
+using PactReferences;
 
 //using ProvidersPactStates;
 
@@ -12,6 +12,7 @@ public sealed class ProviderStateMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IDictionary<string, Action> _providerStates;
+    internal const string ProviderStatesPath = "provider-states";
 
     public ProviderStateMiddleware(RequestDelegate next)
     {

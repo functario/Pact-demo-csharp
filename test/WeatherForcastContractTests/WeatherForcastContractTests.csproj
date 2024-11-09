@@ -23,7 +23,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\Shared\DemoConfigurations\DemoConfigurations.csproj" />
       <ProjectReference Include="..\..\src\WeatherForcast\WeatherForcast.csproj" />
-      <ProjectReference Include="..\ProvidersPactStates\ProvidersPactStates.csproj" />
+      <ProjectReference Include="..\PactReferences\PactReferences.csproj" />
     </ItemGroup>
 
   <ItemGroup>

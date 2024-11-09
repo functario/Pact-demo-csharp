@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CityServiceContractTests.Middleware;
+using Microsoft.AspNetCore.Builder;
 using PactNet.Verifier;
+using PactReferences;
 using Xunit.Abstractions;
 
 namespace CityServiceContractTests.V1;
@@ -22,7 +24,7 @@ public class GetCitiesTests
     public void GetCities_ContractTests()
     {
         // Arrange
-        using var pactVerifier = new PactVerifier(Constants.CityService, _config);
+        using var pactVerifier = new PactVerifier(Participants.CityService, _config);
         var url = _cityServiceService.Urls.Single();
 
         // Act, Assert
@@ -32,7 +34,7 @@ public class GetCitiesTests
         pactVerifier
             .WithHttpEndpoint(new Uri(url))
             .WithDirectorySource(_pactDir)
-            .WithProviderStateUrl(new Uri($"{url}/provider-states"))
+            .WithProviderStateUrl(new Uri($"{url}/{ProviderStateMiddleware.ProviderStatesPath}"))
             .Verify();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using PactNet;
 
-namespace ProvidersPactStates;
+namespace PactReferences;
 
 public sealed class ProviderStateExtend : ProviderState
 {
