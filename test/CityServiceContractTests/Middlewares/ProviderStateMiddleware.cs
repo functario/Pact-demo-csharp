@@ -36,9 +36,9 @@ public sealed class ProviderStateMiddleware
     {
         var cities = new List<City>()
         {
-            new("FakeTokyo", "Japan"),
-            new("FakeNairobi", "Kenya"),
-            new("FakeSeoul", "South Korea")
+            new("Fake City1", "Fake_Country1"),
+            new("FakeCity2", "Fake Country 2"),
+            new("Fake_City3", "FakeCountry3")
         };
 
         _cityRepository.DataSetCities.AddRange(cities);

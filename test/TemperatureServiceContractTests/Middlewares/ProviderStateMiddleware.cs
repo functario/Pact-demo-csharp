@@ -51,9 +51,25 @@ public sealed class ProviderStateMiddleware
                 Units.Celsius,
                 recordDate,
                 new(
-                    "FakeMelbourne",
-                    "FakeAustralia",
+                    "Fake City1",
+                    "Fake Country1",
                     new GeoCoordinate(-37.840935, 144.946457, 0.0778)
+                )
+            ),
+            new(
+                0,
+                Units.Celsius,
+                recordDate,
+                new("FakeCity2", "FakeCountry2", new GeoCoordinate(-37.840935, -29.946457, 0))
+            ),
+            new(
+                -20,
+                Units.Celsius,
+                recordDate,
+                new(
+                    "Fake_City3",
+                    "Fake_Country_3",
+                    new GeoCoordinate(37.840935, 144.946457, -0.0778)
                 )
             )
         ];

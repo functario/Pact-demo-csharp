@@ -8,7 +8,7 @@ using PactReferences;
 using PactReferences.ProviderStates;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.CityService.V1.DTOs;
-using WeatherForcast.Clients.CityService.V1.Models;
+using WeatherForcastContractTests.Fixtures.CityServiceFixtures;
 using Xunit.Abstractions;
 
 namespace WeatherForcastContractTests.CityServiceTests.V1;
@@ -45,7 +45,7 @@ public class GetCitiesTests
     public async Task GetCities_WhenSomeCitiesExist_ReturnsSomeCities()
     {
         // Arrange
-        var expectedResponse = new GetCitiesResponse(Cities: [new City("Paris", "France")]);
+        var expectedResponse = new GetCitiesResponse(CityFixtures.SetOf3Cities);
         // Body returns by API is lowerCase.
         var expectedBody = expectedResponse.ToLowerDynamic(_demoJsonSerializerOptions);
         // csharpier-ignore
