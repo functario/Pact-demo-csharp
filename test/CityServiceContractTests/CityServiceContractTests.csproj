@@ -17,7 +17,6 @@
           <PackageReference Include="xunit" />
           <PackageReference Include="xunit.runner.visualstudio" />
           <PackageReference Include="PactNet" />
-          <PackageReference Include="PactNet.Output.Xunit" />
           <PackageReference Include="dotenv.net" />
       </ItemGroup>
 

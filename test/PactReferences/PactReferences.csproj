@@ -8,5 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="PactNet.Abstractions" />
+        <PackageReference Include="PactNet.Output.Xunit" />
+        <PackageReference Include="xunit.abstractions" />
     </ItemGroup>
 </Project>

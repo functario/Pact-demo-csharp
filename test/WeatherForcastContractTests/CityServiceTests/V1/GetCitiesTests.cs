@@ -4,6 +4,7 @@ using PactNet;
 using PactNet.Matchers;
 using PactNet.Output.Xunit;
 using PactReferences;
+using PactReferences.ProviderStates;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.CityService.V1.DTOs;
 using WeatherForcast.Clients.CityService.V1.Models;

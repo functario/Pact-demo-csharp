@@ -1,35 +1,35 @@
-﻿using CityServiceContractTests.Middlewares;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PactNet.Verifier;
 using PactReferences;
+using TemperatureServiceContractTests.Middlewares;
 using Xunit.Abstractions;
 
-namespace CityServiceContractTests.V1;
+namespace TemperatureServiceContractTests.V1;
 
-public class GetCitiesTests
+public class GetTemperaturesTests
 {
     private readonly DirectoryInfo _pactDir;
     private readonly PactVerifierConfig _config;
-    private readonly WebApplication _cityService;
+    private readonly WebApplication _temperatureService;
 
-    public GetCitiesTests(
-        [FromKeyedServices(Participants.CityService)] WebApplication cityService,
+    public GetTemperaturesTests(
+        [FromKeyedServices(Participants.TemperatureService)] WebApplication temperatureService,
         ITestOutputHelper output
     )
     {
         // Initialize Rust backend
         _pactDir = PactConfigHelper.GetPactDir();
         _config = PactConfigHelper.GetPactVerifierConfig(output);
-        _cityService = cityService;
+        _temperatureService = temperatureService;
     }
 
     [Fact]
-    public void GetCities_ContractTests()
+    public void GetTemperatures_ContractTests()
     {
         // Arrange
-        using var pactVerifier = new PactVerifier(Participants.CityService, _config);
-        var url = _cityService.Urls.Single();
+        using var pactVerifier = new PactVerifier(Participants.TemperatureService, _config);
+        var url = _temperatureService.Urls.Single();
 
         // Act, Assert
         pactVerifier

@@ -1,4 +1,4 @@
-﻿namespace PactReferences;
+﻿namespace PactReferences.ProviderStates;
 
 public static class CityServiceStates
 {
