@@ -1,8 +1,8 @@
 ﻿using MinimalApi.Endpoint;
-using TemperatureProvider.Routes;
-using TemperatureProvider.V1.Models;
+using TemperatureService.Routes;
+using TemperatureService.V1.Models;
 
-namespace TemperatureProvider.V1.Temperatures;
+namespace TemperatureService.V1.Temperatures;
 
 public sealed class GetTemperaturesEndPoint : IEndpoint<IResult, CancellationToken>
 {

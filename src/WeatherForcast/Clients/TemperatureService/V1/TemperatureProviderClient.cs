@@ -1,15 +1,15 @@
 ﻿using System.Text.Json;
 using DemoConfigurations;
-using WeatherForcast.Clients.CityProvider.V1.DTOs;
+using WeatherForcast.Clients.TemperatureService.V1.DTOs;
 
-namespace WeatherForcast.Clients.CityProvider.V1;
+namespace WeatherForcast.Clients.TemperatureService.V1;
 
-public sealed class CityProviderClient : ICityProviderClient
+public sealed class TemperatureProviderClient : ITemperatureProviderClient
 {
     private readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public CityProviderClient(HttpClient httpClient, DemoConfiguration demoConfiguration)
+    public TemperatureProviderClient(HttpClient httpClient, DemoConfiguration demoConfiguration)
     {
         ArgumentNullException.ThrowIfNull(httpClient, nameof(httpClient));
         ArgumentNullException.ThrowIfNull(demoConfiguration, nameof(demoConfiguration));
@@ -17,14 +17,14 @@ public sealed class CityProviderClient : ICityProviderClient
         _jsonSerializerOptions = demoConfiguration.GetJsonSerializerOptions();
     }
 
-    public string CitiesEndPoint => "v1/cities";
+    public string TemperaturesEndPoint => "v1/temperatures";
 
-    public async Task<GetCitiesResponse> GetCities(CancellationToken cancellationToken)
+    public async Task<GetTemperaturesResponse> GetTemperatures(CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(_httpClient.BaseAddress, nameof(_httpClient.BaseAddress));
         using var request = new HttpRequestMessage(
             HttpMethod.Get,
-            $"{_httpClient.BaseAddress}{CitiesEndPoint}"
+            $"{_httpClient.BaseAddress}{TemperaturesEndPoint}"
         );
 
         request.Headers.Add("Accept", "application/json");
@@ -32,11 +32,11 @@ public sealed class CityProviderClient : ICityProviderClient
         var response = await _httpClient.SendAsync(request, cancellationToken);
         response.EnsureSuccessStatusCode();
 
-        var cities = await response.Content.ReadFromJsonAsync<GetCitiesResponse>(
+        var temperatures = await response.Content.ReadFromJsonAsync<GetTemperaturesResponse>(
             _jsonSerializerOptions,
             cancellationToken
         );
 
-        return cities ?? new GetCitiesResponse([]);
+        return temperatures ?? new GetTemperaturesResponse([]);
     }
 }

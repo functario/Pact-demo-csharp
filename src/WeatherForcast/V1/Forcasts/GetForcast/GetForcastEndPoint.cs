@@ -1,6 +1,6 @@
 ﻿using MinimalApi.Endpoint;
-using WeatherForcast.Clients.CityProvider.V1;
-using WeatherForcast.Clients.TemperatureProvider.V1;
+using WeatherForcast.Clients.CityService.V1;
+using WeatherForcast.Clients.TemperatureService.V1;
 using WeatherForcast.Routes;
 using WeatherForcast.V1.Forcasts.Models;
 
@@ -8,11 +8,11 @@ namespace WeatherForcast.V1.Forcasts.GetForcast;
 
 public sealed class GetForcastEndPoint : IEndpoint<IResult, CancellationToken>
 {
-    private readonly ICityProviderClient _cityProviderClient;
+    private readonly ICityServiceClient _cityProviderClient;
     private readonly ITemperatureProviderClient _temperatureProviderClient;
 
     public GetForcastEndPoint(
-        ICityProviderClient cityProviderClient,
+        ICityServiceClient cityProviderClient,
         ITemperatureProviderClient temperatureProviderClient
     )
     {

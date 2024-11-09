@@ -15,5 +15,10 @@ using System.Diagnostics.CodeAnalysis;
     "CA1725:Parameter names should match base declaration",
     Justification = "Not production code",
     Scope = "namespaceanddescendants",
-    Target = "~N:TemperatureProvider.V1"
+    Target = "~N:TemperatureService.V1"
+)]
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0290:Use primary constructor",
+    Justification = "Use explicit and readonly field"
 )]

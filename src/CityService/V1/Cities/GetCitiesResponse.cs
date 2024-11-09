@@ -1,4 +1,4 @@
-﻿using Clients.V1.Models;
+﻿using CityService.V1.Models;
 
 namespace CityService.V1.Cities;
 

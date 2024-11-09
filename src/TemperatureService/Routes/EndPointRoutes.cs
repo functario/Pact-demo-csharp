@@ -1,4 +1,4 @@
-﻿namespace TemperatureProvider.Routes;
+﻿namespace TemperatureService.Routes;
 
 public static class EndPointRoutes
 {

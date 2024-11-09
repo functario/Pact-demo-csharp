@@ -1,6 +1,6 @@
-﻿using WeatherForcast.Clients.TemperatureProvider.V1.DTOs;
+﻿using WeatherForcast.Clients.TemperatureService.V1.DTOs;
 
-namespace WeatherForcast.Clients.TemperatureProvider.V1;
+namespace WeatherForcast.Clients.TemperatureService.V1;
 
 public interface ITemperatureProviderClient
 {

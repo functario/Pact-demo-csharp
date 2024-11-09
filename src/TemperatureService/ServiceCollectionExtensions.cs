@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using MinimalApi.Endpoint.Extensions;
 
-namespace TemperatureProvider;
+namespace TemperatureService;
 
 public static class ServiceCollectionExtensions
 {

@@ -1,4 +1,5 @@
 ﻿using MinimalApi.Endpoint.Extensions;
+using ServiceDefaults;
 
 namespace CityService;
 

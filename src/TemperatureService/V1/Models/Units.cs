@@ -1,4 +1,4 @@
-﻿namespace TemperatureProvider.V1.Models;
+﻿namespace TemperatureService.V1.Models;
 
 public enum Units
 {

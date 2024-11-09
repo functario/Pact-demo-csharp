@@ -1,6 +1,7 @@
 ﻿using MinimalApi.Endpoint.Extensions;
+using ServiceDefaults;
 
-namespace TemperatureProvider;
+namespace TemperatureService;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Design",

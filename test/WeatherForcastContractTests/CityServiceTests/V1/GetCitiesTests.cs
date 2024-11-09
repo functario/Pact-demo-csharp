@@ -4,20 +4,20 @@ using PactNet;
 using PactNet.Matchers;
 using PactNet.Output.Xunit;
 using ProvidersPactStates;
-using WeatherForcast.Clients.CityProvider.V1;
-using WeatherForcast.Clients.CityProvider.V1.DTOs;
-using WeatherForcast.Clients.CityProvider.V1.Models;
+using WeatherForcast.Clients.CityService.V1;
+using WeatherForcast.Clients.CityService.V1.DTOs;
+using WeatherForcast.Clients.CityService.V1.Models;
 using Xunit.Abstractions;
 
-namespace WeatherForcastContractTests.CityProviderTests.V1;
+namespace WeatherForcastContractTests.CityServiceTests.V1;
 
 public class GetCitiesTests
 {
     private readonly IPactBuilderV4 _pactBuilder;
-    private readonly ICityProviderClient _cityProviderClient;
+    private readonly ICityServiceClient _cityProviderClient;
 
     public GetCitiesTests(
-        ICityProviderClient cityProviderClient,
+        ICityServiceClient cityProviderClient,
         PactConfig pactConfig,
         ITestOutputHelper output
     )
@@ -25,10 +25,10 @@ public class GetCitiesTests
         ArgumentNullException.ThrowIfNull(pactConfig, nameof(pactConfig));
         pactConfig.Outputters = [new XunitOutput(output)];
 
-        var pact = Pact.V4("WeatherForcast", "CityService", pactConfig);
+        var pact = Pact.V4(References.WeatherForcast, References.CityService, pactConfig);
 
         // Initialize Rust backend
-        _pactBuilder = pact.WithHttpInteractions(port: Constants.CityProviderPort);
+        _pactBuilder = pact.WithHttpInteractions(port: Constants.CityServicePort);
         _cityProviderClient = cityProviderClient;
     }
 
@@ -42,7 +42,7 @@ public class GetCitiesTests
         // csharpier-ignore
         _pactBuilder
             .UponReceiving("GetCities")
-                .Given(CityProviderStates.SomeCitiesExist.State)
+                .Given(CityServiceStates.SomeCitiesExist.State)
                 .WithRequest(HttpMethod.Get, $"/{_cityProviderClient.CitiesEndPoint}")
                 .WithHeader("Accept", "application/json")
             .WillRespond()

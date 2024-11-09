@@ -20,7 +20,7 @@ public sealed class ProviderStateMiddleware
         // Map state with Actions
         _providerStates = new Dictionary<string, Action>
         {
-            { CityProviderStates.SomeCitiesExist.State, Create3Cities }
+            { CityServiceStates.SomeCitiesExist.State, Create3Cities }
         };
     }
 
