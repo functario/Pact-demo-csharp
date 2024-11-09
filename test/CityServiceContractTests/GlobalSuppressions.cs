@@ -29,3 +29,10 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "namespaceanddescendants",
     Target = "~N:CityServiceContractTests.V1"
 )]
+[assembly: SuppressMessage(
+    "Naming",
+    "CA1725:Parameter names should match base declaration",
+    Justification = "Fake implementation",
+    Scope = "type",
+    Target = "~T:CityServiceContractTests.Middlewares.FakeCityRepository"
+)]

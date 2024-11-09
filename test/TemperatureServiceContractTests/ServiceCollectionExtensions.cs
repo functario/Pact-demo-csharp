@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PactReferences;
+using TemperatureService.Repositories;
 using TemperatureServiceContractTests.Middlewares;
 using TemperatureServiceStartup = TemperatureService.Startup;
 
@@ -21,7 +22,16 @@ internal static class ServiceCollectionExtensions
 
     public static IServiceCollection AddTemperatureService(this IServiceCollection services)
     {
-        var server = TemperatureServiceStartup.WebApp([]);
+        services.AddScoped(_ => TimeProvider.System);
+        services.AddScoped<ITemperatureRepository>(_ => new FakeTemperatureRepository(
+            services.BuildServiceProvider().GetRequiredService<TimeProvider>()
+        ));
+
+        var server = TemperatureServiceStartup.WebApp(
+            [],
+            services.BuildServiceProvider().GetRequiredService<ITemperatureRepository>()
+        );
+
         server.UseMiddleware<ProviderStateMiddleware>();
         server.Start();
         return services.AddActivatedKeyedSingleton(

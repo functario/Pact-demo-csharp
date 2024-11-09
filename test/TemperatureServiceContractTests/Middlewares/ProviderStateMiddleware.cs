@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using PactReferences;
 using PactReferences.ProviderStates;
+using TemperatureService.Repositories;
+using TemperatureService.V1.Models;
 
 //using ProvidersPactStates;
 
@@ -12,12 +14,24 @@ namespace TemperatureServiceContractTests.Middlewares;
 public sealed class ProviderStateMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly TimeProvider _timeProvider;
+    private readonly FakeTemperatureRepository _temperatureRepository;
     private readonly IDictionary<string, Action> _providerStates;
     internal const string ProviderStatesPath = "provider-states";
 
-    public ProviderStateMiddleware(RequestDelegate next)
+    public ProviderStateMiddleware(
+        RequestDelegate next,
+        TimeProvider timeProvider,
+        ITemperatureRepository temperatureRepository
+    )
     {
         _next = next;
+        _timeProvider = timeProvider;
+        _temperatureRepository =
+            temperatureRepository as FakeTemperatureRepository
+            ?? throw new InvalidCastException(
+                $"Could not cast {nameof(temperatureRepository)} to {nameof(FakeTemperatureRepository)}."
+            );
 
         // Map state with Actions
         _providerStates = new Dictionary<string, Action>
@@ -28,7 +42,39 @@ public sealed class ProviderStateMiddleware
 
     private void Create3Temperatures()
     {
-        // TODO: implement repository.
+        var recordDate = _timeProvider.GetUtcNow();
+
+        List<Temperature> temperatures =
+        [
+            new(
+                35,
+                Units.Celsius,
+                recordDate,
+                new(
+                    "Fake City1",
+                    "Fake Country1",
+                    new GeoCoordinate(-37.840935, 144.946457, 0.0778)
+                )
+            ),
+            new(
+                0,
+                Units.Celsius,
+                recordDate,
+                new("FakeCity2", "FakeCountry2", new GeoCoordinate(-37.840935, -29.946457, 0))
+            ),
+            new(
+                -20,
+                Units.Celsius,
+                recordDate,
+                new(
+                    "Fake_City3",
+                    "Fake_Country_3",
+                    new GeoCoordinate(37.840935, 144.946457, -0.0778)
+                )
+            )
+        ];
+
+        _temperatureRepository.DataSetTemperatures.AddRange(temperatures);
     }
 
     public async Task Invoke(HttpContext context)

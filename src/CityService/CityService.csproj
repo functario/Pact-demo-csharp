@@ -14,6 +14,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\AspireProjects\ServiceDefaults\ServiceDefaults.csproj" />
+      <ProjectReference Include="..\Shared\DemoConfigurations\DemoConfigurations.csproj" />
     </ItemGroup>
 
     <ItemGroup>

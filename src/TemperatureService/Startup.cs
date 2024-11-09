@@ -1,5 +1,6 @@
 ﻿using MinimalApi.Endpoint.Extensions;
 using ServiceDefaults;
+using TemperatureService.Repositories;
 
 namespace TemperatureService;
 
@@ -10,7 +11,10 @@ namespace TemperatureService;
 )]
 public class Startup
 {
-    public static WebApplication WebApp(string[] args)
+    public static WebApplication WebApp(
+        string[] args,
+        ITemperatureRepository? temperatureRepository = null
+    )
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +30,7 @@ public class Startup
 
         // Register Services
         builder.Host.ConfigureServices(
-            (context, services) => services.AddTemperatureProvider(context)
+            (context, services) => services.AddTemperatureService(context, temperatureRepository)
         );
 
         var app = builder.Build();

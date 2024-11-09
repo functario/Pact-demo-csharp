@@ -25,8 +25,16 @@
           "content": {
             "cities": [
               {
-                "country": "France",
-                "name": "Paris"
+                "country": "South Korea",
+                "name": "Seoul"
+              },
+              {
+                "country": "USA",
+                "name": "New York"
+              },
+              {
+                "country": "Canada",
+                "name": "Québec"
               }
             ]
           },

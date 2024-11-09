@@ -1,10 +1,18 @@
-﻿using CityService.Routes;
+﻿using CityService.Repositories;
+using CityService.Routes;
 using MinimalApi.Endpoint;
 
 namespace CityService.V1.Cities;
 
 public sealed class GetCitiesEndpoint : IEndpoint<IResult, CancellationToken>
 {
+    private readonly ICityRepository _cityRepository;
+
+    public GetCitiesEndpoint(ICityRepository cityRepository)
+    {
+        _cityRepository = cityRepository;
+    }
+
     public void AddRoute(IEndpointRouteBuilder app)
     {
         var route = $"/{EndPointRoutes.V1}/{EndPointRoutes.Cities}";
@@ -22,9 +30,10 @@ public sealed class GetCitiesEndpoint : IEndpoint<IResult, CancellationToken>
         ;
     }
 
-    public async Task<IResult> HandleAsync(CancellationToken _)
+    public async Task<IResult> HandleAsync(CancellationToken cancellationToken)
     {
-        var cities = new GetCitiesResponse([new("Paris", "France")]);
-        return await Task.FromResult(TypedResults.Ok(cities));
+        var cities = await _cityRepository.GetCities(cancellationToken);
+        var response = new GetCitiesResponse(cities);
+        return TypedResults.Ok(response);
     }
 }
