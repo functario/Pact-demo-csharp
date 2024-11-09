@@ -17,3 +17,8 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "namespaceanddescendants",
     Target = "~N:CityService.V1"
 )]
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0290:Use primary constructor",
+    Justification = "Use explicit and readonly field"
+)]

@@ -15,12 +15,17 @@ using System.Diagnostics.CodeAnalysis;
     "CA1707:Identifiers should not contain underscores",
     Justification = "Test nomenclature",
     Scope = "namespaceanddescendants",
-    Target = "~N:CityProviderContractTests"
+    Target = "~N:CityServiceContractTests"
 )]
 [assembly: SuppressMessage(
     "Reliability",
     "CA2000:Dispose objects before losing scope",
     Justification = "Instance disposed by Xunit.DependencyInjection",
     Scope = "member",
-    Target = "~M:CityProviderContractTests.ServiceCollectionExtensions.AddCityProviderService(Microsoft.Extensions.DependencyInjection.IServiceCollection)~Microsoft.Extensions.DependencyInjection.IServiceCollection"
+    Target = "~M:CityServiceContractTests.ServiceCollectionExtensions.AddCityServiceService(Microsoft.Extensions.DependencyInjection.IServiceCollection)~Microsoft.Extensions.DependencyInjection.IServiceCollection"
+)]
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0290:Use primary constructor",
+    Justification = "Use explicit and readonly field"
 )]

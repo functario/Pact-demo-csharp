@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace CityProviderContractTests;
+namespace CityServiceContractTests;
 
 public static class Startup
 {
@@ -22,7 +22,7 @@ public static class Startup
             .ConfigureServices(
                 (context, services) =>
                 {
-                    services.AddCityProviderContractTests(context);
+                    services.AddCityServiceContractTests(context);
                 }
             );
     }

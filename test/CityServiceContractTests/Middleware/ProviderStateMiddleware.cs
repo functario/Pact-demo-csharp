@@ -6,7 +6,7 @@ using ProvidersPactStates;
 
 //using ProvidersPactStates;
 
-namespace CityProviderContractTests.Middleware;
+namespace CityServiceContractTests.Middleware;
 
 public sealed class ProviderStateMiddleware
 {

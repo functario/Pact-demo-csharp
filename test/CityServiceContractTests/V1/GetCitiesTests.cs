@@ -1,35 +1,29 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using PactNet;
 using PactNet.Verifier;
 using Xunit.Abstractions;
 
-namespace CityProviderContractTests.V1;
+namespace CityServiceContractTests.V1;
 
 public class GetCitiesTests
 {
     private readonly DirectoryInfo _pactDir;
-    private readonly IPactBuilderV4 _pactBuilder;
     private readonly PactVerifierConfig _config;
-    private readonly WebApplication _cityProviderService;
+    private readonly WebApplication _cityServiceService;
 
-    public GetCitiesTests(WebApplication cityProviderService, ITestOutputHelper output)
+    public GetCitiesTests(WebApplication cityServiceService, ITestOutputHelper output)
     {
-        var pact = Pact.V4("WeatherForcast", "CityProvider");
-
         // Initialize Rust backend
         _pactDir = PactHelper.GetPactDir();
-
-        _pactBuilder = pact.WithHttpInteractions(port: Constants.CityProviderPort);
         _config = PactHelper.GetPactVerifierConfig(output);
-        _cityProviderService = cityProviderService;
+        _cityServiceService = cityServiceService;
     }
 
     [Fact]
     public void GetCities_ContractTests()
     {
         // Arrange
-        using var pactVerifier = new PactVerifier(Constants.CityProvider, _config);
-        var url = _cityProviderService.Urls.Single();
+        using var pactVerifier = new PactVerifier(Constants.CityService, _config);
+        var url = _cityServiceService.Urls.Single();
 
         // Act, Assert
 

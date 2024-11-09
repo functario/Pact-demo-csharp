@@ -3,7 +3,7 @@ using PactNet.Output.Xunit;
 using PactNet.Verifier;
 using Xunit.Abstractions;
 
-namespace CityProviderContractTests;
+namespace CityServiceContractTests;
 
 internal static class PactHelper
 {

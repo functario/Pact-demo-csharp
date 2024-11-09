@@ -17,3 +17,8 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "namespaceanddescendants",
     Target = "~N:WeatherForcastContractTests"
 )]
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0290:Use primary constructor",
+    Justification = "Use explicit and readonly field"
+)]
