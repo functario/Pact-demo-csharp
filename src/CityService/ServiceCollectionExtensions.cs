@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using CityService.Repositories;
 using MinimalApi.Endpoint.Extensions;
 
 namespace CityService;
@@ -12,9 +13,14 @@ public static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        services.AddMinimalApi();
+        services.AddMinimalApi().AddRepositories();
 
         return services;
+    }
+
+    internal static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        return services.AddScoped<ICityRepository, FakeCityRepository>();
     }
 
     internal static IServiceCollection AddMinimalApi(this IServiceCollection services)

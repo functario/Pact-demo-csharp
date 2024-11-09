@@ -12,7 +12,7 @@ The projects have a `.env` to be configured in a state during demo.
 
 ## PACTDEMO_PACTLOGLEVEL
 
-The PactLogLevel.
+The level of log to display in command line or xunit output.
 
 | Value       |
 | ----------- |
