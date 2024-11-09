@@ -4,7 +4,6 @@ using DemoConfigurations;
 using FluentAssertions;
 using PactNet;
 using PactNet.Matchers;
-using PactNet.Output.Xunit;
 using PactReferences;
 using PactReferences.ProviderStates;
 using WeatherForcast.Clients.CityService.V1;
@@ -22,16 +21,19 @@ public class GetCitiesTests
 
     public GetCitiesTests(
         ICityServiceClient cityServiceClient,
-        PactConfig pactConfig,
+        PactConfigHelper configHelper,
         DemoConfiguration demoConfiguration,
         ITestOutputHelper output
     )
     {
-        ArgumentNullException.ThrowIfNull(pactConfig, nameof(pactConfig));
+        ArgumentNullException.ThrowIfNull(configHelper, paramName: nameof(configHelper));
         ArgumentNullException.ThrowIfNull(demoConfiguration, nameof(demoConfiguration));
-        pactConfig.Outputters = [new XunitOutput(output)];
 
-        var pact = Pact.V4(Participants.WeatherForcast, Participants.CityService, pactConfig);
+        var pact = Pact.V4(
+            Participants.WeatherForcast,
+            Participants.CityService,
+            configHelper.GetPactConfig(output)
+        );
 
         // Initialize Rust backend
         _pactBuilder = pact.WithHttpInteractions(port: Constants.CityServicePort);

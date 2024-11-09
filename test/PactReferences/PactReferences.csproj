@@ -10,5 +10,12 @@
         <PackageReference Include="PactNet.Abstractions" />
         <PackageReference Include="PactNet.Output.Xunit" />
         <PackageReference Include="xunit.abstractions" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Shared\DemoConfigurations\DemoConfigurations.csproj" />
     </ItemGroup>
 </Project>

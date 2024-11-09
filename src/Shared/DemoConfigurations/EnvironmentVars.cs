@@ -2,5 +2,7 @@
 
 public static class EnvironmentVars
 {
-    public const string WEATHER_FORCAST_DEMO_CASE = "WEATHER_FORCAST_DEMO_CASE";
+    public const string PACTDEMO_DEMOCASE = "PACTDEMO_DEMOCASE";
+    public const string PACTDEMO_PACTLOGLEVEL = "PACTDEMO_PACTLOGLEVEL";
+    public const string PACTDEMO_PACTFOLDER = "PACTDEMO_PACTFOLDER";
 }

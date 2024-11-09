@@ -1,7 +1,6 @@
-﻿using DemoConfigurations;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PactNet;
+using PactReferences;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.TemperatureService.V1;
 
@@ -15,8 +14,7 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        services.AddSingleton(_ => new DemoConfiguration(context.Configuration));
-        return services.AddCityServiceClient().AddPactConfiguration();
+        return services.AddCityServiceClient().AddPactReferences(context);
     }
 
     public static IServiceCollection AddCityServiceClient(this IServiceCollection services)
@@ -30,15 +28,6 @@ internal static class ServiceCollectionExtensions
         {
             c.BaseAddress = new Uri(Constants.TemperatureServiceBaseAddress);
         });
-
-        return services;
-    }
-
-    public static IServiceCollection AddPactConfiguration(this IServiceCollection services)
-    {
-        services.AddSingleton(
-            new PactConfig() { PactDir = Constants.PactDir, LogLevel = PactLogLevel.Error }
-        );
 
         return services;
     }

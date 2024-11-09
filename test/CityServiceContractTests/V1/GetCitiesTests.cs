@@ -15,12 +15,15 @@ public class GetCitiesTests
 
     public GetCitiesTests(
         [FromKeyedServices(Participants.CityService)] WebApplication cityService,
+        PactConfigHelper pactConfigHelper,
         ITestOutputHelper output
     )
     {
+        ArgumentNullException.ThrowIfNull(pactConfigHelper, nameof(pactConfigHelper));
+
         // Initialize Rust backend
-        _pactDir = PactConfigHelper.GetPactDir();
-        _config = PactConfigHelper.GetPactVerifierConfig(output);
+        _pactDir = pactConfigHelper.GetPactDir();
+        _config = pactConfigHelper.GetPactVerifierConfig(output);
         _cityService = cityService;
     }
 

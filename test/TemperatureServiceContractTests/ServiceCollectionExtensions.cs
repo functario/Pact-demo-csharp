@@ -1,5 +1,4 @@
-﻿using DemoConfigurations;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,8 +16,7 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        services.AddSingleton(_ => new DemoConfiguration(context.Configuration));
-        return services.AddTemperatureService();
+        return services.AddTemperatureService().AddPactReferences(context);
     }
 
     public static IServiceCollection AddTemperatureService(this IServiceCollection services)

@@ -1,18 +1,28 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Configuration;
+using PactNet;
 
 namespace DemoConfigurations;
 
 public sealed class DemoConfiguration
 {
     private readonly DemoCases _demoCases;
+    private readonly PactLogLevel _pactLogLevel;
+    private readonly string _pactFolder;
 
     public DemoConfiguration(IConfiguration configuration)
     {
         ArgumentNullException.ThrowIfNull(configuration, nameof(configuration));
-        _demoCases = configuration.GetValue<DemoCases>(EnvironmentVars.WEATHER_FORCAST_DEMO_CASE);
+        _demoCases = configuration.GetValue<DemoCases>(EnvironmentVars.PACTDEMO_DEMOCASE);
+        _pactLogLevel = configuration.GetValue<PactLogLevel>(EnvironmentVars.PACTDEMO_PACTLOGLEVEL);
+        var pactFolder = configuration.GetValue<string?>(EnvironmentVars.PACTDEMO_PACTFOLDER);
+        ArgumentException.ThrowIfNullOrWhiteSpace(pactFolder, EnvironmentVars.PACTDEMO_PACTFOLDER);
+        _pactFolder = pactFolder;
     }
+
+    public PactLogLevel PactLogLevel => _pactLogLevel;
+    public string PactFolder => _pactFolder;
 
     public JsonSerializerOptions GetJsonSerializerOptions()
     {

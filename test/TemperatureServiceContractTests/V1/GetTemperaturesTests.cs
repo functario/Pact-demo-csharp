@@ -15,12 +15,15 @@ public class GetTemperaturesTests
 
     public GetTemperaturesTests(
         [FromKeyedServices(Participants.TemperatureService)] WebApplication temperatureService,
+        PactConfigHelper pactConfigHelper,
         ITestOutputHelper output
     )
     {
+        ArgumentNullException.ThrowIfNull(pactConfigHelper, nameof(pactConfigHelper));
+
         // Initialize Rust backend
-        _pactDir = PactConfigHelper.GetPactDir();
-        _config = PactConfigHelper.GetPactVerifierConfig(output);
+        _pactDir = pactConfigHelper.GetPactDir();
+        _config = pactConfigHelper.GetPactVerifierConfig(output);
         _temperatureService = temperatureService;
     }
 
