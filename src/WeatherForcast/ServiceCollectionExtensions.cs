@@ -55,7 +55,7 @@ public static class ServiceCollectionExtensions
         services.AddHttpClient();
         services.AddHttpClient<ICityProviderClient, CityProviderClient>(c =>
         {
-            c.BaseAddress = new Uri($"https+http://{"cityprovider"}");
+            c.BaseAddress = new Uri($"https+http://{"cityservice"}");
         });
 
         services.AddHttpClient<ITemperatureProviderClient, TemperatureProviderClient>(c =>

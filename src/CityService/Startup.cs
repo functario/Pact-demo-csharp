@@ -1,6 +1,6 @@
 ﻿using MinimalApi.Endpoint.Extensions;
 
-namespace CityProvider;
+namespace CityService;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Design",
@@ -24,7 +24,7 @@ public class Startup
         builder.Logging.ClearProviders();
 
         // Register Services
-        builder.Host.ConfigureServices((context, services) => services.AddCityProvider(context));
+        builder.Host.ConfigureServices((context, services) => services.AddCityService(context));
 
         var app = builder.Build();
 

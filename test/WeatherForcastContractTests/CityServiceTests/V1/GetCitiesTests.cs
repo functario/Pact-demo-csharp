@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Text.Json;
 using FluentAssertions;
 using PactNet;
 using PactNet.Matchers;
@@ -16,7 +15,6 @@ public class GetCitiesTests
 {
     private readonly IPactBuilderV4 _pactBuilder;
     private readonly ICityProviderClient _cityProviderClient;
-    private readonly JsonSerializerOptions _jsonSerializerOptions;
 
     public GetCitiesTests(
         ICityProviderClient cityProviderClient,
@@ -27,16 +25,11 @@ public class GetCitiesTests
         ArgumentNullException.ThrowIfNull(pactConfig, nameof(pactConfig));
         pactConfig.Outputters = [new XunitOutput(output)];
 
-        var pact = Pact.V4("WeatherForcast", "CityProvider", pactConfig);
+        var pact = Pact.V4("WeatherForcast", "CityService", pactConfig);
 
         // Initialize Rust backend
         _pactBuilder = pact.WithHttpInteractions(port: Constants.CityProviderPort);
         _cityProviderClient = cityProviderClient;
-        _jsonSerializerOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            PropertyNameCaseInsensitive = false
-        };
     }
 
     [Fact]

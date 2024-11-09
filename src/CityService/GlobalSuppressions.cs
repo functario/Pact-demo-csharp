@@ -15,5 +15,5 @@ using System.Diagnostics.CodeAnalysis;
     "CA1725:Parameter names should match base declaration",
     Justification = "Not production code",
     Scope = "namespaceanddescendants",
-    Target = "~N:CityProvider.V1"
+    Target = "~N:CityService.V1"
 )]

@@ -2,11 +2,11 @@
 using System.Text.Json.Serialization;
 using MinimalApi.Endpoint.Extensions;
 
-namespace CityProvider;
+namespace CityService;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCityProvider(
+    public static IServiceCollection AddCityService(
         this IServiceCollection services,
         HostBuilderContext context
     )

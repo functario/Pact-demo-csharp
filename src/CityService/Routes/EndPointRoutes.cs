@@ -1,4 +1,4 @@
-﻿namespace CityProvider.Routes;
+﻿namespace CityService.Routes;
 
 public static class EndPointRoutes
 {

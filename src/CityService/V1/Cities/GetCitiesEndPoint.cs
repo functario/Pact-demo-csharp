@@ -1,7 +1,7 @@
-﻿using CityProvider.Routes;
+﻿using CityService.Routes;
 using MinimalApi.Endpoint;
 
-namespace CityProvider.V1.Cities;
+namespace CityService.V1.Cities;
 
 public sealed class GetCitiesEndpoint : IEndpoint<IResult, CancellationToken>
 {

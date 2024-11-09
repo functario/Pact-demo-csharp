@@ -65,6 +65,6 @@
     }
   },
   "provider": {
-    "name": "CityProvider"
+    "name": "CityService"
   }
 }

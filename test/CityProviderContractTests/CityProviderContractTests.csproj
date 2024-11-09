@@ -22,7 +22,7 @@
       </ItemGroup>
 
       <ItemGroup>
-        <ProjectReference Include="..\..\src\CityProvider\CityProvider.csproj" />
+        <ProjectReference Include="..\..\src\CityService\CityService.csproj" />
         <ProjectReference Include="..\..\src\Shared\DemoConfigurations\DemoConfigurations.csproj" />
         <ProjectReference Include="..\ProvidersPactStates\ProvidersPactStates.csproj" />
       </ItemGroup>
