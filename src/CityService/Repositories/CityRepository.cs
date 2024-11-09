@@ -8,7 +8,7 @@ public sealed class CityRepository : ICityRepository
     [
         new("Paris", "France"),
         new("Berlin", "Germany"),
-        new("Pune", "India")
+        new("Melbourne", "Australia")
     ];
 
     public Task<ICollection<City>> GetCities(CancellationToken _)

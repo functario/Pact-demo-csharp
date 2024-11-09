@@ -47,7 +47,19 @@ public sealed class GetForcastEndPoint : IEndpoint<IResult, CancellationToken>
         List<Forcast> forcasts = [];
         foreach (var city in cityResponse.Cities)
         {
-            forcasts.Add(new Forcast(city.Name, 10.5, Units.Celsius));
+            var temperature = temperatureResponse
+                .Temperatures.Where(x =>
+                    x.Location.CityName == city.Name && x.Location.Country == city.Country
+                )
+                .SingleOrDefault()
+                ?.Value;
+
+            if (temperature is not double validTemperature)
+            {
+                return TypedResults.NotFound(city);
+            }
+
+            forcasts.Add(new Forcast(city.Name, validTemperature, Units.Celsius));
         }
 
         return await Task.FromResult(TypedResults.Ok(forcasts));
