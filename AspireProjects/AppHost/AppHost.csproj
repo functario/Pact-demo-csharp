@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CityProvider\CityProvider.csproj" />
-    <ProjectReference Include="..\..\src\TemperatureProvider\TemperatureProvider.csproj" />
+    <ProjectReference Include="..\..\src\TemperatureService\TemperatureService.csproj" />
     <ProjectReference Include="..\..\src\WeatherForcast\WeatherForcast.csproj" />
   </ItemGroup>
 

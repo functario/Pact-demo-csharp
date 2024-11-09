@@ -60,7 +60,7 @@ public static class ServiceCollectionExtensions
 
         services.AddHttpClient<ITemperatureProviderClient, TemperatureProviderClient>(c =>
         {
-            c.BaseAddress = new Uri($"https+http://{"temperatureprovider"}");
+            c.BaseAddress = new Uri($"https+http://{"temperatureservice"}");
         });
 
         return services;

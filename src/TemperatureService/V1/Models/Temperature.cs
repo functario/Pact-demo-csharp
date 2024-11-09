@@ -5,5 +5,4 @@ public sealed record Temperature(
     Units Unit,
     DateTimeOffset RecordDate,
     Location Location
-)
-{ }
+) { }
