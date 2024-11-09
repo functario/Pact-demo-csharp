@@ -4,7 +4,6 @@ using DemoConfigurations;
 using FluentAssertions;
 using PactNet;
 using PactNet.Matchers;
-using PactNet.Output.Xunit;
 using PactReferences;
 using PactReferences.ProviderStates;
 using WeatherForcast.Clients.TemperatureService.V1;
@@ -22,19 +21,18 @@ public class GetTemperaturesTests
 
     public GetTemperaturesTests(
         ITemperatureServiceClient temperatureServiceClient,
-        PactConfig pactConfig,
+        PactConfigHelper configHelper,
         DemoConfiguration demoConfiguration,
         ITestOutputHelper output
     )
     {
-        ArgumentNullException.ThrowIfNull(pactConfig, nameof(pactConfig));
+        ArgumentNullException.ThrowIfNull(configHelper, paramName: nameof(configHelper));
         ArgumentNullException.ThrowIfNull(demoConfiguration, nameof(demoConfiguration));
-        pactConfig.Outputters = [new XunitOutput(output)];
 
         var pact = Pact.V4(
             Participants.WeatherForcast,
             Participants.TemperatureService,
-            pactConfig
+            configHelper.GetPactConfig(output)
         );
 
         // Initialize Rust backend

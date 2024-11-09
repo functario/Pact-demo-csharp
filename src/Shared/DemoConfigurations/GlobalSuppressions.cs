@@ -11,13 +11,6 @@ using System.Diagnostics.CodeAnalysis;
     Justification = "Not production code"
 )]
 [assembly: SuppressMessage(
-    "Design",
-    "CA1024:Use properties where appropriate",
-    Justification = "<Pending>",
-    Scope = "member",
-    Target = "~M:DemoConfiguration.Configurations.DemoConfiguration.GetJsonSerializerOptions~System.Text.Json.JsonSerializerOptions"
-)]
-[assembly: SuppressMessage(
     "Naming",
     "CA1707:Identifiers should not contain underscores",
     Justification = "Allowed for environment variables",
