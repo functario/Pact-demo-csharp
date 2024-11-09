@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityServiceContractTests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PactReferences", "test\PactReferences\PactReferences.csproj", "{9841C637-B2C4-4927-A6AB-B8CA6869505C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemperatureServiceContractTests", "test\TemperatureServiceContractTests\TemperatureServiceContractTests.csproj", "{203387BA-59F9-480B-AA08-4B4129A3E2E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{9841C637-B2C4-4927-A6AB-B8CA6869505C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9841C637-B2C4-4927-A6AB-B8CA6869505C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9841C637-B2C4-4927-A6AB-B8CA6869505C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{203387BA-59F9-480B-AA08-4B4129A3E2E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{203387BA-59F9-480B-AA08-4B4129A3E2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{203387BA-59F9-480B-AA08-4B4129A3E2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{203387BA-59F9-480B-AA08-4B4129A3E2E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{8A5B9DAD-DC4A-4E16-AB44-71D67AE6C776} = {575244E4-337F-45C4-886E-0CC27F8F892A}
 		{D927FB96-2290-4037-8EDB-5D9CA3919169} = {4D21B2A1-8B90-48D3-9D49-7C48B81AE481}
 		{9841C637-B2C4-4927-A6AB-B8CA6869505C} = {4D21B2A1-8B90-48D3-9D49-7C48B81AE481}
+		{203387BA-59F9-480B-AA08-4B4129A3E2E3} = {4D21B2A1-8B90-48D3-9D49-7C48B81AE481}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BDAD170-243C-4FCA-95DE-59B8960AD6A8}

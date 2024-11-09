@@ -7,21 +7,21 @@ using PactNet.Matchers;
 using PactNet.Output.Xunit;
 using PactReferences;
 using PactReferences.ProviderStates;
-using WeatherForcast.Clients.CityService.V1;
-using WeatherForcast.Clients.CityService.V1.DTOs;
-using WeatherForcast.Clients.CityService.V1.Models;
+using WeatherForcast.Clients.TemperatureService.V1;
+using WeatherForcast.Clients.TemperatureService.V1.DTOs;
+using WeatherForcastContractTests.Fixtures.TemperatureServiceFixtures;
 using Xunit.Abstractions;
 
 namespace WeatherForcastContractTests.CityServiceTests.V1;
 
-public class GetCitiesTests
+public class GetTemperaturesTests
 {
     private readonly IPactBuilderV4 _pactBuilder;
-    private readonly ICityServiceClient _cityServiceClient;
+    private readonly ITemperatureServiceClient _temperatureServiceClient;
     private readonly JsonSerializerOptions _demoJsonSerializerOptions;
 
-    public GetCitiesTests(
-        ICityServiceClient cityServiceClient,
+    public GetTemperaturesTests(
+        ITemperatureServiceClient temperatureServiceClient,
         PactConfig pactConfig,
         DemoConfiguration demoConfiguration,
         ITestOutputHelper output
@@ -31,26 +31,33 @@ public class GetCitiesTests
         ArgumentNullException.ThrowIfNull(demoConfiguration, nameof(demoConfiguration));
         pactConfig.Outputters = [new XunitOutput(output)];
 
-        var pact = Pact.V4(Participants.WeatherForcast, Participants.CityService, pactConfig);
+        var pact = Pact.V4(
+            Participants.WeatherForcast,
+            Participants.TemperatureService,
+            pactConfig
+        );
 
         // Initialize Rust backend
-        _pactBuilder = pact.WithHttpInteractions(port: Constants.CityServicePort);
-        _cityServiceClient = cityServiceClient;
+        _pactBuilder = pact.WithHttpInteractions(port: Constants.TemperatureServicePort);
+        _temperatureServiceClient = temperatureServiceClient;
         _demoJsonSerializerOptions = demoConfiguration.GetJsonSerializerOptions();
     }
 
     [Fact]
-    public async Task GetCities_WhenSomeCitiesExist_ReturnsSomeCities()
+    public async Task GetTemperatures_WhenSomeTemperatureExist_ReturnsSomeTemperatures()
     {
         // Arrange
-        var expectedResponse = new GetCitiesResponse(Cities: [new City("Paris", "France")]);
+
+        var expectedResponse = new GetTemperaturesResponse(
+            TemperatureFixtures.SetOf3CelsiusTemperatures
+        );
         // Body returns by API is lowerCase.
         var expectedBody = expectedResponse.ToLowerDynamic(_demoJsonSerializerOptions);
         // csharpier-ignore
         _pactBuilder
-            .UponReceiving("GetCities")
-                .Given(CityServiceStates.SomeCitiesExist.State)
-                .WithRequest(HttpMethod.Get, $"/{_cityServiceClient.EndPoint}")
+            .UponReceiving("GetTemperatures")
+                .Given(TemperatureServiceStates.SomeTemperaturesExist.State)
+                .WithRequest(HttpMethod.Get, $"/{_temperatureServiceClient.EndPoint}")
                 .WithHeader("Accept", "application/json")
             .WillRespond()
                 .WithStatus(HttpStatusCode.OK)
@@ -63,7 +70,9 @@ public class GetCitiesTests
             using var cancellationTokenSource = new CancellationTokenSource(
                 TimeSpan.FromSeconds(5)
             );
-            var response = await _cityServiceClient.GetCities(cancellationTokenSource.Token);
+            var response = await _temperatureServiceClient.GetTemperatures(
+                cancellationTokenSource.Token
+            );
 
             // Assert
             response.Should().BeEquivalentTo(expectedResponse);

@@ -3,10 +3,11 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using PactReferences;
+using PactReferences.ProviderStates;
 
 //using ProvidersPactStates;
 
-namespace CityServiceContractTests.Middleware;
+namespace TemperatureServiceContractTests.Middlewares;
 
 public sealed class ProviderStateMiddleware
 {
@@ -21,11 +22,11 @@ public sealed class ProviderStateMiddleware
         // Map state with Actions
         _providerStates = new Dictionary<string, Action>
         {
-            { CityServiceStates.SomeCitiesExist.State, Create3Cities }
+            { TemperatureServiceStates.SomeTemperaturesExist.State, Create3Temperatures }
         };
     }
 
-    private void Create3Cities()
+    private void Create3Temperatures()
     {
         // TODO: implement repository.
     }
@@ -36,7 +37,7 @@ public sealed class ProviderStateMiddleware
         ArgumentNullException.ThrowIfNull(context, nameof(context));
         if (
             context.Request.Path.StartsWithSegments(
-                "/provider-states",
+                $"/{ProviderStatesPath}",
                 StringComparison.OrdinalIgnoreCase
             )
         )

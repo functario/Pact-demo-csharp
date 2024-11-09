@@ -2,8 +2,8 @@
 
 namespace WeatherForcast.Clients.TemperatureService.V1;
 
-public interface ITemperatureProviderClient
+public interface ITemperatureServiceClient
 {
     Task<GetTemperaturesResponse> GetTemperatures(CancellationToken cancellationToken);
-    string TemperaturesEndPoint { get; }
+    string EndPoint { get; }
 }

@@ -4,17 +4,13 @@ namespace WeatherForcastContractTests;
 
 public static class ResponseExtensions
 {
-    private static readonly JsonSerializerOptions s_snakeCaseLowerOptions =
-        new()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            PropertyNameCaseInsensitive = false
-        };
-
-    public static dynamic? ToLowerDynamic<T>(this T response)
+    public static dynamic? ToLowerDynamic<T>(
+        this T response,
+        JsonSerializerOptions jsonSerializerOptions
+    )
     {
         return JsonSerializer.Deserialize<dynamic>(
-            JsonSerializer.Serialize(response, s_snakeCaseLowerOptions)
+            JsonSerializer.Serialize(response, jsonSerializerOptions)
         );
     }
 }
