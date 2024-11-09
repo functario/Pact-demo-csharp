@@ -16,13 +16,6 @@ public class FakeCityRepository : ICityRepository
 
     public Task<ICollection<City>> GetCities(CancellationToken _)
     {
-        var cities = new List<City>()
-        {
-            new("FakeParis", "FakeFrance"),
-            new("FakeBerlin", "FakeGermany"),
-            new("FakePune", "FakeIndia")
-        };
-
-        return Task.FromResult<ICollection<City>>(cities);
+        return Task.FromResult(DataSetCities);
     }
 }

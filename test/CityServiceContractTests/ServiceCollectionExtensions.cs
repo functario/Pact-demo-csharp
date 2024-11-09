@@ -23,10 +23,12 @@ internal static class ServiceCollectionExtensions
     public static IServiceCollection AddCityService(this IServiceCollection services)
     {
         services.AddScoped<ICityRepository>(_ => new FakeCityRepository());
+
         var server = CityServiceStartup.WebApp(
             [],
             services.BuildServiceProvider().GetRequiredService<ICityRepository>()
         );
+
         // To handle pact states.
         server.UseMiddleware<ProviderStateMiddleware>();
         server.Start();

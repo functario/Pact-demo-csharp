@@ -1,16 +1,16 @@
 ﻿using MinimalApi.Endpoint;
+using TemperatureService.Repositories;
 using TemperatureService.Routes;
-using TemperatureService.V1.Models;
 
 namespace TemperatureService.V1.Temperatures;
 
 public sealed class GetTemperaturesEndPoint : IEndpoint<IResult, CancellationToken>
 {
-    private readonly TimeProvider _timeProvider;
+    private readonly ITemperatureRepository _temperatureRepository;
 
-    public GetTemperaturesEndPoint(TimeProvider timeProvider)
+    public GetTemperaturesEndPoint(ITemperatureRepository temperatureRepository)
     {
-        _timeProvider = timeProvider;
+        _temperatureRepository = temperatureRepository;
     }
 
     public void AddRoute(IEndpointRouteBuilder app)
@@ -30,14 +30,10 @@ public sealed class GetTemperaturesEndPoint : IEndpoint<IResult, CancellationTok
         ;
     }
 
-    public async Task<IResult> HandleAsync(CancellationToken _)
+    public async Task<IResult> HandleAsync(CancellationToken cancellationToken)
     {
-        var recordDate = _timeProvider.GetUtcNow();
-        var geoCoordinates = new GeoCoordinate(48.8575, 2.3514, 1.0245);
-        var location = new Location("Paris", "France", geoCoordinates);
-        var temperatures = new GetTemperaturesResponse(
-            [new Temperature(18.5, Units.Celsius, recordDate, location)]
-        );
-        return await Task.FromResult(TypedResults.Ok(temperatures));
+        var temperatures = await _temperatureRepository.GetTemperatures(cancellationToken);
+        var response = new GetTemperaturesResponse(temperatures);
+        return await Task.FromResult(TypedResults.Ok(response));
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CityService.Repositories;
 
-public class CityRepository : ICityRepository
+public sealed class CityRepository : ICityRepository
 {
     private readonly ICollection<City> _cities =
     [
