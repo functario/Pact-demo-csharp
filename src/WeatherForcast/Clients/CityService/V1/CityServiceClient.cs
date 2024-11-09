@@ -17,14 +17,14 @@ public sealed class CityServiceClient : ICityServiceClient
         _jsonSerializerOptions = demoConfiguration.GetJsonSerializerOptions();
     }
 
-    public string CitiesEndPoint => "v1/cities";
+    public string EndPoint => "v1/cities";
 
     public async Task<GetCitiesResponse> GetCities(CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(_httpClient.BaseAddress, nameof(_httpClient.BaseAddress));
         using var request = new HttpRequestMessage(
             HttpMethod.Get,
-            $"{_httpClient.BaseAddress}{CitiesEndPoint}"
+            $"{_httpClient.BaseAddress}{EndPoint}"
         );
 
         request.Headers.Add("Accept", "application/json");

@@ -28,16 +28,7 @@ public static class PactConfigHelper
         return new PactVerifierConfig
         {
             Outputters = [new XunitOutput(output)],
-            LogLevel = PactLogLevel.Debug
-        };
-    }
-
-    public static PactVerifierConfig GetPactVerifier(ITestOutputHelper output)
-    {
-        return new PactVerifierConfig
-        {
-            Outputters = [new XunitOutput(output)],
-            LogLevel = PactLogLevel.Debug
+            LogLevel = PactLogLevel.Error
         };
     }
 }

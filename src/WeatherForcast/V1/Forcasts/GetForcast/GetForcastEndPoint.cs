@@ -9,11 +9,11 @@ namespace WeatherForcast.V1.Forcasts.GetForcast;
 public sealed class GetForcastEndPoint : IEndpoint<IResult, CancellationToken>
 {
     private readonly ICityServiceClient _cityProviderClient;
-    private readonly ITemperatureProviderClient _temperatureProviderClient;
+    private readonly ITemperatureServiceClient _temperatureProviderClient;
 
     public GetForcastEndPoint(
         ICityServiceClient cityProviderClient,
-        ITemperatureProviderClient temperatureProviderClient
+        ITemperatureServiceClient temperatureProviderClient
     )
     {
         _cityProviderClient = cityProviderClient;

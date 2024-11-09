@@ -5,5 +5,5 @@ namespace WeatherForcast.Clients.CityService.V1;
 public interface ICityServiceClient
 {
     Task<GetCitiesResponse> GetCities(CancellationToken cancellationToken);
-    string CitiesEndPoint { get; }
+    string EndPoint { get; }
 }

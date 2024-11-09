@@ -1,0 +1,108 @@
+{
+  "consumer": {
+    "name": "WeatherForcast"
+  },
+  "interactions": [
+    {
+      "description": "GetTemperatures",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "SomeTemperaturesExist"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": [
+            "application/json"
+          ]
+        },
+        "method": "GET",
+        "path": "/v1/temperatures"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "temperatures": [
+              {
+                "location": {
+                  "city_name": "Paris",
+                  "country": "France",
+                  "geo_coordinate": {
+                    "altitude": -0.3757,
+                    "latitude": 48.8575,
+                    "longitude": 2.3514
+                  }
+                },
+                "record_date": "2025-12-27T13:55:18+00:00",
+                "unit": "Celsius",
+                "value": 15.1
+              },
+              {
+                "location": {
+                  "city_name": "Melbourne",
+                  "country": "Australia",
+                  "geo_coordinate": {
+                    "altitude": 0.0778,
+                    "latitude": -37.840935,
+                    "longitude": 144.946457
+                  }
+                },
+                "record_date": "2025-12-27T13:55:18+00:00",
+                "unit": "Celsius",
+                "value": 32
+              },
+              {
+                "location": {
+                  "city_name": "Quebec",
+                  "country": "Canada",
+                  "geo_coordinate": {
+                    "altitude": 1.0245,
+                    "latitude": 46.829853,
+                    "longitude": -73.935242
+                  }
+                },
+                "record_date": "2025-12-27T13:55:18+00:00",
+                "unit": "Celsius",
+                "value": -25
+              }
+            ]
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json; charset=utf-8"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.23",
+      "models": "1.2.5"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "TemperatureService"
+  }
+}
