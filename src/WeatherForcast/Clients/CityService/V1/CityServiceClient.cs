@@ -30,6 +30,9 @@ public sealed class CityServiceClient : ICityServiceClient
         request.Headers.Add("Accept", "application/json");
 
         var response = await _httpClient.SendAsync(request, cancellationToken);
+
+        var a = await response.Content.ReadAsStringAsync(cancellationToken);
+
         response.EnsureSuccessStatusCode();
 
         var cities = await response.Content.ReadFromJsonAsync<GetCitiesResponse>(

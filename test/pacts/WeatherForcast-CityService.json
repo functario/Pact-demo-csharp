@@ -15,7 +15,23 @@
         "headers": {
           "Accept": [
             "application/json"
+          ],
+          "Authorization": [
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzEyNjE3MjgsImlzcyI6ImF1dGhlbnRpY2F0aW9uc2VydmljZSIsImF1ZCI6IndlYXRoZXJmb3JjYXN0YXBpIn0.TMwRk-3BbhheWcWlKH4yPDbmEKgcqb5RAUipZYbH5BA"
           ]
+        },
+        "matchingRules": {
+          "header": {
+            "Authorization": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "^Bearer\\s+([A-Za-z0-9\\-\\._~\\+\\/]+=*)$"
+                }
+              ]
+            }
+          }
         },
         "method": "GET",
         "path": "/v1/cities"

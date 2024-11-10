@@ -25,7 +25,41 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    internal static IServiceCollection AddWeatherForcastOptions(this IServiceCollection services)
+    public static IServiceCollection AddClients(this IServiceCollection services)
+    {
+        services.AddHttpClient();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddTransient<AuthorizationDelegatingHandler>();
+        services
+            .AddHttpClient<ICityServiceClient, CityServiceClient>(
+                (serviceProvider, client) =>
+                {
+                    var options = serviceProvider
+                        .GetRequiredService<IOptions<WeatherForcastOptions>>()
+                        .Value;
+
+                    ArgumentNullException.ThrowIfNull(options, nameof(options));
+                    client.BaseAddress = new Uri(options.CityServiceBaseAddress);
+                }
+            )
+            .AddHttpMessageHandler<AuthorizationDelegatingHandler>();
+
+        services.AddHttpClient<ITemperatureServiceClient, TemperatureServiceClient>(
+            (serviceProvider, client) =>
+            {
+                var options = serviceProvider
+                    .GetRequiredService<IOptions<WeatherForcastOptions>>()
+                    .Value;
+
+                ArgumentNullException.ThrowIfNull(options, nameof(options));
+                client.BaseAddress = new Uri(options.TemperatureServiceBaseAddress);
+            }
+        );
+
+        return services;
+    }
+
+    public static IServiceCollection AddWeatherForcastOptions(this IServiceCollection services)
     {
         services
             .AddOptions<WeatherForcastOptions>()
@@ -35,7 +69,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    internal static IServiceCollection AddAuthenticationCustom(this IServiceCollection services)
+    public static IServiceCollection AddAuthenticationCustom(this IServiceCollection services)
     {
         var demoConfiguration = services
             .BuildServiceProvider()
@@ -66,13 +100,13 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    internal static IServiceCollection AddAuthorizationCustom(this IServiceCollection services)
+    public static IServiceCollection AddAuthorizationCustom(this IServiceCollection services)
     {
         services.AddAuthorization();
         return services;
     }
 
-    internal static void AddSwagger(this IServiceCollection services)
+    public static void AddSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(c =>
         {
@@ -108,7 +142,7 @@ public static class ServiceCollectionExtensions
         });
     }
 
-    internal static IServiceCollection AddMinimalApi(this IServiceCollection services)
+    public static IServiceCollection AddMinimalApi(this IServiceCollection services)
     {
         services.ConfigureHttpJsonOptions(options =>
         {
@@ -131,39 +165,5 @@ public static class ServiceCollectionExtensions
         });
 
         return services.AddEndpointsApiExplorer().AddSwaggerGen().AddEndpoints();
-    }
-
-    public static IServiceCollection AddClients(this IServiceCollection services)
-    {
-        services.AddHttpClient();
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        services.AddTransient<AuthorizationDelegatingHandler>();
-        services
-            .AddHttpClient<ICityServiceClient, CityServiceClient>(
-                (serviceProvider, client) =>
-                {
-                    var options = serviceProvider
-                        .GetRequiredService<IOptions<WeatherForcastOptions>>()
-                        .Value;
-
-                    ArgumentNullException.ThrowIfNull(options, nameof(options));
-                    client.BaseAddress = new Uri(options.CityServiceBaseAddress);
-                }
-            )
-            .AddHttpMessageHandler<AuthorizationDelegatingHandler>();
-
-        services.AddHttpClient<ITemperatureServiceClient, TemperatureServiceClient>(
-            (serviceProvider, client) =>
-            {
-                var options = serviceProvider
-                    .GetRequiredService<IOptions<WeatherForcastOptions>>()
-                    .Value;
-
-                ArgumentNullException.ThrowIfNull(options, nameof(options));
-                client.BaseAddress = new Uri(options.TemperatureServiceBaseAddress);
-            }
-        );
-
-        return services;
     }
 }

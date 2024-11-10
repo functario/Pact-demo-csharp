@@ -9,6 +9,7 @@ public sealed class AuthorizationDelegatingHandler : DelegatingHandler
     public AuthorizationDelegatingHandler(IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
+        ArgumentNullException.ThrowIfNull(_httpContextAccessor, nameof(_httpContextAccessor));
     }
 
     protected override Task<HttpResponseMessage> SendAsync(

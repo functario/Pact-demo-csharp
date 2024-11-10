@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PactReferences;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.TemperatureService.V1;
+using WeatherForcastContractTests.TemperatureServiceTests.V1.Fakes;
 
 namespace WeatherForcastContractTests;
 
@@ -14,20 +16,32 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        return services.AddCityServiceClient().AddPactReferences(context);
+        return services.AddClients().AddPactReferences(context);
     }
 
-    public static IServiceCollection AddCityServiceClient(this IServiceCollection services)
+    public static IServiceCollection AddClients(this IServiceCollection services)
     {
-        services.AddHttpClient<ICityServiceClient, CityServiceClient>(c =>
-        {
-            c.BaseAddress = new Uri(Constants.CityServiceBaseAddress);
-        });
+        services.AddHttpClient();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-        services.AddHttpClient<ITemperatureServiceClient, TemperatureServiceClient>(c =>
-        {
-            c.BaseAddress = new Uri(Constants.TemperatureServiceBaseAddress);
-        });
+        // Register fake AuthorizationDelegatingHandler to inject token into the client.
+        services.AddTransient<FakeAuthorizationDelegatingHandler>();
+
+        services
+            .AddHttpClient<ICityServiceClient, CityServiceClient>(
+                (serviceProvider, client) =>
+                {
+                    client.BaseAddress = new Uri(Constants.CityServiceBaseAddress);
+                }
+            )
+            .AddHttpMessageHandler<FakeAuthorizationDelegatingHandler>();
+
+        services.AddHttpClient<ITemperatureServiceClient, TemperatureServiceClient>(
+            (serviceProvider, client) =>
+            {
+                client.BaseAddress = new Uri(Constants.TemperatureServiceBaseAddress);
+            }
+        );
 
         return services;
     }

@@ -30,6 +30,9 @@ public class GetCitiesTests
     [Fact]
     public void GetCities_ContractTests()
     {
+        // Fail because the authorization need to be handled
+        // see https://github.com/pact-foundation/pact-workshop-dotnet?tab=readme-ov-file#step-9---implement-authorization-on-the-provider
+
         // Arrange
         using var pactVerifier = new PactVerifier(Participants.CityService, _config);
         var url = _cityService.Urls.Single();
