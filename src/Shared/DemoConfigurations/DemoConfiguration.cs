@@ -1,32 +1,44 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.Extensions.Configuration;
+using DemoConfigurations.Configurations;
+using Microsoft.Extensions.Options;
 using PactNet;
 
 namespace DemoConfigurations;
 
 public sealed class DemoConfiguration
 {
-    private readonly DemoCases _demoCases;
+    private readonly DemoCases _demoCase;
     private readonly PactLogLevel _pactLogLevel;
     private readonly string _pactFolder;
+    private readonly string _authenticationKey;
 
-    public DemoConfiguration(IConfiguration configuration)
+    public DemoConfiguration(IOptionsMonitor<DemoOptions> options)
     {
-        ArgumentNullException.ThrowIfNull(configuration, nameof(configuration));
-        _demoCases = configuration.GetValue<DemoCases>(EnvironmentVars.PACTDEMO_DEMOCASE);
-        _pactLogLevel = configuration.GetValue<PactLogLevel>(EnvironmentVars.PACTDEMO_PACTLOGLEVEL);
-        var pactFolder = configuration.GetValue<string?>(EnvironmentVars.PACTDEMO_PACTFOLDER);
+        ArgumentNullException.ThrowIfNull(options, nameof(options));
+        var pactFolder = options.CurrentValue.PactFolder;
+        var authenticationKey = options.CurrentValue.AuthenticationKey;
+        var demoCase = options.CurrentValue.DemoCase;
+        var pactLogLevel = options.CurrentValue.PactLogLevel;
         ArgumentException.ThrowIfNullOrWhiteSpace(pactFolder, EnvironmentVars.PACTDEMO_PACTFOLDER);
+        ArgumentException.ThrowIfNullOrWhiteSpace(
+            authenticationKey,
+            EnvironmentVars.PACTDEMO_AUTHENTICATIONKEY
+        );
+
         _pactFolder = pactFolder;
+        _authenticationKey = authenticationKey;
+        _demoCase = demoCase;
+        _pactLogLevel = pactLogLevel;
     }
 
     public PactLogLevel PactLogLevel => _pactLogLevel;
     public string PactFolder => _pactFolder;
+    public string AuthenticationKey => _authenticationKey;
 
     public JsonSerializerOptions GetJsonSerializerOptions()
     {
-        return _demoCases switch
+        return _demoCase switch
         {
             DemoCases.Undefined
                 => throw new InvalidOperationException(

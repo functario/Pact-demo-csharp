@@ -4,6 +4,7 @@
     <TargetFramework>$(SdkTargetFramework)</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>48714f7b-3d34-48ef-bb55-060ab2f7db20</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +12,8 @@
       <PackageReference Include="Swashbuckle.AspNetCore" />
       <PackageReference Include="MinimalApi.Endpoint" />
       <PackageReference Include="dotenv.net" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+      <PackageReference Include="Microsoft.AspNetCore.Authorization" />
   </ItemGroup>
 
   <ItemGroup>

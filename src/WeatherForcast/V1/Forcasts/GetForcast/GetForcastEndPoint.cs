@@ -6,7 +6,7 @@ using WeatherForcast.V1.Forcasts.Models;
 
 namespace WeatherForcast.V1.Forcasts.GetForcast;
 
-public sealed class GetForcastEndPoint : IEndpoint<IResult, CancellationToken>
+public sealed class GetForcastEndPoint : IEndpoint<IResult, HttpContext, CancellationToken>
 {
     private readonly ICityServiceClient _cityProviderClient;
     private readonly ITemperatureServiceClient _temperatureProviderClient;
@@ -25,19 +25,23 @@ public sealed class GetForcastEndPoint : IEndpoint<IResult, CancellationToken>
         var route = $"/{EndPointRoutes.V1}/{EndPointRoutes.Forcasts}";
         app.MapGet(
                 route,
-                async (CancellationToken request) =>
+                async (HttpContext httpContext, CancellationToken request) =>
                 {
-                    return await HandleAsync(request);
+                    return await HandleAsync(httpContext, request);
                 }
             )
             .WithName(EndPointRoutes.Forcasts)
             .WithOpenApi()
             .WithTags(EndPointRoutes.Forcasts)
+            .RequireAuthorization()
             .Produces(StatusCodes.Status200OK, typeof(GetForcastResponse));
         ;
     }
 
-    public async Task<IResult> HandleAsync(CancellationToken cancellationToken)
+    public async Task<IResult> HandleAsync(
+        HttpContext httpContext,
+        CancellationToken cancellationToken
+    )
     {
         var cityResponse = await _cityProviderClient.GetCities(cancellationToken);
         var temperatureResponse = await _temperatureProviderClient.GetTemperatures(

@@ -26,6 +26,7 @@ public sealed class GetCitiesEndpoint : IEndpoint<IResult, CancellationToken>
             .WithName(EndPointRoutes.Cities)
             .WithOpenApi()
             .WithTags(EndPointRoutes.Cities)
+            .RequireAuthorization()
             .Produces(StatusCodes.Status200OK, typeof(GetCitiesResponse));
         ;
     }

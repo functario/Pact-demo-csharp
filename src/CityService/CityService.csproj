@@ -4,12 +4,16 @@
     <TargetFramework>$(SdkTargetFramework)</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>10cf7a01-283a-4167-b493-dce1db70f03a</UserSecretsId>
   </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
         <PackageReference Include="MinimalApi.Endpoint" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+        <PackageReference Include="Microsoft.AspNetCore.Authorization" />
+        <PackageReference Include="dotenv.net" />
     </ItemGroup>
 
     <ItemGroup>
