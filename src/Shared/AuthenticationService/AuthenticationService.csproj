@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\AspireProjects\ServiceDefaults\ServiceDefaults.csproj" />
     <ProjectReference Include="..\DemoConfigurations\DemoConfigurations.csproj" />
+    <ProjectReference Include="..\JWTGenerator\JWTGenerator.csproj" />
   </ItemGroup>
 
 </Project>

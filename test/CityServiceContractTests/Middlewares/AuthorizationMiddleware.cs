@@ -1,16 +1,19 @@
-﻿using System.Text.RegularExpressions;
+﻿using DemoConfigurations;
+using JWTGenerator;
 using Microsoft.AspNetCore.Http;
 
 namespace CityServiceContractTests.Middlewares;
 
-public partial class AuthorizationMiddleware
+public class AuthorizationMiddleware
 {
     private const string AuthorizationHeaderKey = "Authorization";
     private readonly RequestDelegate _next;
+    private readonly DemoConfiguration _demoConfiguration;
 
-    public AuthorizationMiddleware(RequestDelegate next)
+    public AuthorizationMiddleware(RequestDelegate next, DemoConfiguration demoConfiguration)
     {
         _next = next;
+        _demoConfiguration = demoConfiguration;
     }
 
     public async Task Invoke(HttpContext context)
@@ -19,32 +22,15 @@ public partial class AuthorizationMiddleware
         if (context.Request.Headers.ContainsKey(AuthorizationHeaderKey))
         {
             AuthorizationHeader(context.Request);
-            await this._next(context);
         }
-        else
-        {
-            UnauthorizedResponse(context);
-        }
+
+        await _next(context);
     }
 
-    private static string AuthorizationHeader(HttpRequest request)
+    private void AuthorizationHeader(HttpRequest request)
     {
-        var authorizationHeader = request.Headers.Authorization.FirstOrDefault();
-        if (authorizationHeader is null)
-            return "";
-        var match = BearerRegex().Match(authorizationHeader);
-        var value = match.Groups[1].Value;
-        // TODO: Return a valid token
-        //request.Headers.Authorization =
-        //
-        return value;
-    }
+        var token = TokenGenerator.GenerateToken(_demoConfiguration.AuthenticationKey);
 
-    private static void UnauthorizedResponse(HttpContext context)
-    {
-        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        request.Headers.Authorization = $"Bearer {token}";
     }
-
-    [GeneratedRegex("Bearer (.*)")]
-    private static partial Regex BearerRegex();
 }

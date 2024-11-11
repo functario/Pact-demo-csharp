@@ -23,3 +23,10 @@ using System.Diagnostics.CodeAnalysis;
     "IDE0290:Use primary constructor",
     Justification = "Use explicit and readonly field"
 )]
+[assembly: SuppressMessage(
+    "Naming",
+    "CA1725:Parameter names should match base declaration",
+    Justification = "<Pending>",
+    Scope = "namespaceanddescendants",
+    Target = "~N:AuthenticationService.V1.Authenticate"
+)]

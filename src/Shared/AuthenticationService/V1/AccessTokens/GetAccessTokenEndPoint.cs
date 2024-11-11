@@ -1,5 +1,6 @@
 ﻿using AuthenticationService.Routes;
 using DemoConfigurations;
+using JWTGenerator;
 using Microsoft.AspNetCore.Authentication.BearerToken;
 using MinimalApi.Endpoint;
 

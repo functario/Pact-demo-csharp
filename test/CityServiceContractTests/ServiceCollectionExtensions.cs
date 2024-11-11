@@ -31,7 +31,9 @@ internal static class ServiceCollectionExtensions
 
         // To handle pact states.
         server.UseMiddleware<ProviderStateMiddleware>();
-        server.UseMiddleware<AuthorizationMiddleware>();
+        // TODO: Investigate why it is not called if add after ProviderStateMiddleware.
+        // Also it is only called on "provider-states" and not other called.
+        //server.UseMiddleware<AuthorizationMiddleware>();
         server.Start();
         return services.AddActivatedKeyedSingleton(Participants.CityService, (_, _) => server);
     }
