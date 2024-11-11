@@ -45,6 +45,8 @@ public class Startup
         app.UseHttpsRedirection();
         app.MapEndpoints();
         app.MapDefaultEndpoints();
+        app.UseExceptionHandler();
+
         return app;
     }
 }

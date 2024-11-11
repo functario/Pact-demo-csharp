@@ -18,8 +18,12 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
         services.AddMinimalApi().AddSwagger();
-        services.AddClients();
-        services.AddWeatherForcastOptions().AddDemoConfigurations(context);
+        services
+            .AddExceptionHandler<GlobalExceptionHandler>()
+            .AddClients()
+            .AddProblemDetails()
+            .AddWeatherForcastOptions()
+            .AddDemoConfigurations(context);
 
         services.AddAuthenticationCustom().AddAuthorizationCustom();
         return services;

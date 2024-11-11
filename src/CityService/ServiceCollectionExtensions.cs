@@ -17,7 +17,10 @@ public static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
+
         services
+            .AddExceptionHandler<GlobalExceptionHandler>()
+            .AddProblemDetails()
             .AddEndpointsApiExplorer()
             .AddMinimalApi()
             .AddRepositories(injectedCityRepository)
