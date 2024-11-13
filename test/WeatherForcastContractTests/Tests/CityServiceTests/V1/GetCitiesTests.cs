@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
 using DemoConfigurations;
-using FluentAssertions;
 using PactNet;
 using PactNet.Matchers;
 using PactReferences;
