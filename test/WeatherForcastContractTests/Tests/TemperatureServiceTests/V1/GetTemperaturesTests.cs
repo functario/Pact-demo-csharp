@@ -1,12 +1,10 @@
 ﻿using System.Net;
 using System.Text.Json;
 using DemoConfigurations;
-using FluentAssertions;
 using PactNet;
 using PactNet.Matchers;
 using PactReferences;
 using PactReferences.ProviderStates;
-using VerifyTests;
 using WeatherForcast.Clients.TemperatureService.V1;
 using WeatherForcast.Clients.TemperatureService.V1.DTOs;
 using WeatherForcastContractTests.Fixtures.TemperatureServiceFixtures;
