@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using PactReferences;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.TemperatureService.V1;
-using WeatherForcastContractTests.TemperatureServiceTests.V1.Fakes;
+using WeatherForcastContractTests.Support;
 
 namespace WeatherForcastContractTests;
 
