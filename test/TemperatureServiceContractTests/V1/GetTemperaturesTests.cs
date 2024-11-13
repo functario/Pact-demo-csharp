@@ -3,10 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using PactNet.Verifier;
 using PactReferences;
 using TemperatureServiceContractTests.Middlewares;
+using TemperatureServiceContractTests.TestsConfigurations;
 using Xunit.Abstractions;
 
 namespace TemperatureServiceContractTests.V1;
 
+[CollectionDefinition(TemperatureServiceContractTestsCollection.Name)]
 public class GetTemperaturesTests
 {
     private readonly DirectoryInfo _pactDir;

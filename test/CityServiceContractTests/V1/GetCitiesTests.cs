@@ -1,4 +1,5 @@
 ﻿using CityServiceContractTests.Middlewares;
+using CityServiceContractTests.TestsConfigurations;
 using DemoConfigurations;
 using JWTGenerator;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace CityServiceContractTests.V1;
 
+[CollectionDefinition(CityServiceContractTestsCollection.Name)]
 public class GetCitiesTests
 {
     private readonly DirectoryInfo _pactDir;
