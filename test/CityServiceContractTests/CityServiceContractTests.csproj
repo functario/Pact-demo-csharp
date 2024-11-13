@@ -17,6 +17,7 @@
           <PackageReference Include="xunit" />
           <PackageReference Include="xunit.runner.visualstudio" />
           <PackageReference Include="PactNet" />
+          <PackageReference Include="PactNet.Output.Xunit" />
           <PackageReference Include="dotenv.net" />
       </ItemGroup>
 
@@ -29,12 +30,6 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update=".env">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

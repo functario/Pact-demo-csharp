@@ -21,11 +21,6 @@ public class Startup
         // Aspire
         builder.AddServiceDefaults();
 
-        // Add services to the container.
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-
         builder.Logging.ClearProviders();
 
         // Register Services

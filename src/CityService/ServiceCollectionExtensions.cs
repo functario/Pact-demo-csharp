@@ -21,7 +21,6 @@ public static class ServiceCollectionExtensions
         services
             .AddExceptionHandler<GlobalExceptionHandler>()
             .AddProblemDetails()
-            .AddEndpointsApiExplorer()
             .AddMinimalApi()
             .AddRepositories(injectedCityRepository)
             .AddDemoConfigurations(context)

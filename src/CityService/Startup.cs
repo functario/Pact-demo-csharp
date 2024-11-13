@@ -19,16 +19,16 @@ public class Startup
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Aspire
+        builder.AddServiceDefaults();
+
         builder.Logging.ClearProviders();
 
         // Load appsettings and environment variables.
-        DotEnv.Fluent().WithTrimValues().WithOverwriteExistingVars().Load();
+        DotEnv.Fluent().WithTrimValues().Load();
         builder
             .Configuration.AddJsonFile($"appsettings.json", optional: false)
             .AddEnvironmentVariables();
-
-        // Aspire
-        builder.AddServiceDefaults();
 
         // Register and Configure Services
         builder.Host.ConfigureServices(
@@ -44,15 +44,15 @@ public class Startup
             app.UseSwaggerUI();
         }
 
+        app.UseHttpsRedirection();
         app.MapEndpoints();
         app.MapDefaultEndpoints();
+        app.UseExceptionHandler();
 
         // Middlewares
         // Todo: app.UseCors();
-        app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseExceptionHandler();
 
         return app;
     }
