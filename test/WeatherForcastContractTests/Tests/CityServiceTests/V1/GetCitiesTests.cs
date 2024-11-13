@@ -12,7 +12,7 @@ using WeatherForcastContractTests.Fixtures.AuthenticationServiceFixtures;
 using WeatherForcastContractTests.Fixtures.CityServiceFixtures;
 using Xunit.Abstractions;
 
-namespace WeatherForcastContractTests.CityServiceTests.V1;
+namespace WeatherForcastContractTests.Tests.CityServiceTests.V1;
 
 public class GetCitiesTests
 {

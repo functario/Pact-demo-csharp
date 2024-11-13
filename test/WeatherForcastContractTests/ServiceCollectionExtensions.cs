@@ -24,7 +24,7 @@ internal static class ServiceCollectionExtensions
         return services.AddSingleton(x =>
         {
             var settings = new VerifySettings();
-            settings.UseDirectory("snapshot");
+            settings.UseDirectory("snapshots");
             return settings;
         });
     }

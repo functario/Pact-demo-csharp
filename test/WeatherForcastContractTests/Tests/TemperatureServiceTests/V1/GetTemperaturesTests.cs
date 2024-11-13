@@ -12,7 +12,7 @@ using WeatherForcast.Clients.TemperatureService.V1.DTOs;
 using WeatherForcastContractTests.Fixtures.TemperatureServiceFixtures;
 using Xunit.Abstractions;
 
-namespace WeatherForcastContractTests.TemperatureServiceTests.V1;
+namespace WeatherForcastContractTests.Tests.TemperatureServiceTests.V1;
 
 public class GetTemperaturesTests
 {
@@ -73,6 +73,7 @@ public class GetTemperaturesTests
             using var cancellationTokenSource = new CancellationTokenSource(
                 TimeSpan.FromSeconds(5)
             );
+
             var response = await _temperatureServiceClient.GetTemperatures(
                 cancellationTokenSource.Token
             );
