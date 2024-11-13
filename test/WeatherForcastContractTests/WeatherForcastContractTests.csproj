@@ -19,6 +19,7 @@
         <PackageReference Include="PactNet" />
         <PackageReference Include="PactNet.Output.Xunit" />
         <PackageReference Include="FluentAssertions.Json" />
+        <PackageReference Include="Verify.Xunit" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\src\Shared\DemoConfigurations\DemoConfigurations.csproj" />

@@ -1,0 +1,43 @@
+﻿{
+  Temperatures: [
+    {
+      Value: 15.1,
+      RecordDate: DateTimeOffset_1,
+      Location: {
+        CityName: New York,
+        Country: USA,
+        GeoCoordinate: {
+          Latitude: 48.8575,
+          Longitude: 2.3514,
+          Altitude: -0.3757
+        }
+      }
+    },
+    {
+      Value: 32.0,
+      RecordDate: DateTimeOffset_1,
+      Location: {
+        CityName: Seoul,
+        Country: South Korea,
+        GeoCoordinate: {
+          Latitude: 48.8575,
+          Longitude: 2.3514,
+          Altitude: -0.3757
+        }
+      }
+    },
+    {
+      Value: -25.0,
+      RecordDate: DateTimeOffset_1,
+      Location: {
+        CityName: Quebec,
+        Country: Canada,
+        GeoCoordinate: {
+          Latitude: 46.829853,
+          Longitude: -73.935242,
+          Altitude: 1.0245
+        }
+      }
+    }
+  ]
+}

@@ -12,18 +12,20 @@ using WeatherForcastContractTests.Fixtures.AuthenticationServiceFixtures;
 using WeatherForcastContractTests.Fixtures.CityServiceFixtures;
 using Xunit.Abstractions;
 
-namespace WeatherForcastContractTests.CityServiceTests.V1;
+namespace WeatherForcastContractTests.Tests.CityServiceTests.V1;
 
 public class GetCitiesTests
 {
     private readonly IPactBuilderV4 _pactBuilder;
     private readonly ICityServiceClient _cityServiceClient;
+    private readonly VerifySettings _verifySettings;
     private readonly JsonSerializerOptions _demoJsonSerializerOptions;
 
     public GetCitiesTests(
         ICityServiceClient cityServiceClient,
         PactConfigHelper configHelper,
         DemoConfiguration demoConfiguration,
+        VerifySettings verifySettings,
         ITestOutputHelper output
     )
     {
@@ -39,12 +41,14 @@ public class GetCitiesTests
         // Initialize Rust backend
         _pactBuilder = pact.WithHttpInteractions(port: Constants.CityServicePort);
         _cityServiceClient = cityServiceClient;
+        _verifySettings = verifySettings;
         _demoJsonSerializerOptions = demoConfiguration.GetJsonSerializerOptions();
     }
 
     [Fact]
     public async Task GetCities_WhenSomeCitiesExist_ReturnsSomeCities()
     {
+        // csharpier-ignore
         // Arrange
         var tokenMatch = Match.Regex(
             $"Bearer {AuthenticationFixtures.ValidOldToken}",
@@ -52,30 +56,32 @@ public class GetCitiesTests
         );
 
         var expectedResponse = new GetCitiesResponse(CityFixtures.SetOf3Cities);
+
         // Body returns by API is lowerCase.
         var expectedBody = expectedResponse.ToLowerDynamic(_demoJsonSerializerOptions);
-        // csharpier-ignore
+
         _pactBuilder
             .UponReceiving("GetCities")
-                .Given(CityServiceStates.SomeCitiesExist.State)
-                .WithRequest(HttpMethod.Get, $"/{_cityServiceClient.EndPoint}")
-                .WithHeader("Accept", "application/json")
-                .WithHeader("Authorization", tokenMatch)
+            .Given(CityServiceStates.SomeCitiesExist.State)
+            .WithRequest(HttpMethod.Get, $"/{_cityServiceClient.EndPoint}")
+            .WithHeader("Accept", "application/json")
+            .WithHeader("Authorization", tokenMatch)
             .WillRespond()
-                .WithStatus(HttpStatusCode.OK)
-                .WithHeader("Content-Type", "application/json; charset=utf-8")
-                .WithJsonBody(new TypeMatcher(expectedBody));
+            .WithStatus(HttpStatusCode.OK)
+            .WithHeader("Content-Type", "application/json; charset=utf-8")
+            .WithJsonBody(new TypeMatcher(expectedBody));
 
+        // Act
         await _pactBuilder.VerifyAsync(async ctx =>
         {
-            // Act
             using var cancellationTokenSource = new CancellationTokenSource(
                 TimeSpan.FromSeconds(5)
             );
+
             var response = await _cityServiceClient.GetCities(cancellationTokenSource.Token);
 
             // Assert
-            response.Should().BeEquivalentTo(expectedResponse);
+            await Verify(response, _verifySettings);
         });
     }
 }

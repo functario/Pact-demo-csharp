@@ -16,7 +16,17 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        return services.AddClients().AddPactReferences(context);
+        return services.AddClients().AddPactReferences(context).ConfigureVerify();
+    }
+
+    public static IServiceCollection ConfigureVerify(this IServiceCollection services)
+    {
+        return services.AddSingleton(x =>
+        {
+            var settings = new VerifySettings();
+            settings.UseDirectory("snapshots");
+            return settings;
+        });
     }
 
     public static IServiceCollection AddClients(this IServiceCollection services)

@@ -1,0 +1,16 @@
+﻿{
+  Cities: [
+    {
+      Name: Seoul,
+      Country: South Korea
+    },
+    {
+      Name: New York,
+      Country: USA
+    },
+    {
+      Name: Québec,
+      Country: Canada
+    }
+  ]
+}
