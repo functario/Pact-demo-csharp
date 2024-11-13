@@ -22,3 +22,10 @@ using System.Diagnostics.CodeAnalysis;
     "IDE0290:Use primary constructor",
     Justification = "Use explicit and readonly field"
 )]
+[assembly: SuppressMessage(
+    "Performance",
+    "CA1812:Avoid uninstantiated internal classes",
+    Justification = "Used at runtime",
+    Scope = "type",
+    Target = "~T:WeatherForcastContractTests.Support.FakeAuthorizationDelegatingHandler"
+)]

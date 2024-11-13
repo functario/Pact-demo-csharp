@@ -14,7 +14,11 @@ public static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        services.AddMinimalApi().AddRepositories(temperatureRepository);
+        services
+            .AddExceptionHandler<GlobalExceptionHandler>()
+            .AddProblemDetails()
+            .AddMinimalApi()
+            .AddRepositories(temperatureRepository);
 
         return services;
     }

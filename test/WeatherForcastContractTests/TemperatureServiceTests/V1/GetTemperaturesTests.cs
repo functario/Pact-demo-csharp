@@ -11,7 +11,7 @@ using WeatherForcast.Clients.TemperatureService.V1.DTOs;
 using WeatherForcastContractTests.Fixtures.TemperatureServiceFixtures;
 using Xunit.Abstractions;
 
-namespace WeatherForcastContractTests.CityServiceTests.V1;
+namespace WeatherForcastContractTests.TemperatureServiceTests.V1;
 
 public class GetTemperaturesTests
 {

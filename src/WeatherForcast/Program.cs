@@ -34,4 +34,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapEndpoints();
 app.MapDefaultEndpoints();
+app.UseExceptionHandler();
+
 app.Run();

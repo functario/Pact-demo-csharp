@@ -32,18 +32,6 @@ public sealed class ProviderStateMiddleware
         };
     }
 
-    private void Create3Cities()
-    {
-        var cities = new List<City>()
-        {
-            new("Fake City1", "Fake_Country1"),
-            new("FakeCity2", "Fake Country 2"),
-            new("Fake_City3", "FakeCountry3")
-        };
-
-        _cityRepository.DataSetCities.AddRange(cities);
-    }
-
     public async Task Invoke(HttpContext context)
     {
         // Warning: Debugging this section with breakpoint may timeout silently.
@@ -62,6 +50,18 @@ public sealed class ProviderStateMiddleware
         {
             await _next(context);
         }
+    }
+
+    private void Create3Cities()
+    {
+        var cities = new List<City>()
+        {
+            new("Fake City1", "Fake_Country1"),
+            new("FakeCity2", "Fake Country 2"),
+            new("Fake_City3", "FakeCountry3")
+        };
+
+        _cityRepository.DataSetCities.AddRange(cities);
     }
 
     private async Task HandleProviderStatesRequest(HttpContext context)

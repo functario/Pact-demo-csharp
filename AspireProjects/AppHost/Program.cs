@@ -2,13 +2,15 @@
 
 var builder = DistributedApplication.CreateBuilder(args);
 
+builder.AddProject<AuthenticationService>("authenticationservice");
 var cityservice = builder.AddProject<CityService>("cityservice");
-var temperatureProvider = builder.AddProject<TemperatureService>("temperatureservice");
+
+var temperatureService = builder.AddProject<TemperatureService>("temperatureservice");
 
 builder
     .AddProject<WeatherForcast>("weatherforcast")
     .WithReference(cityservice)
-    .WithReference(temperatureProvider);
+    .WithReference(temperatureService);
 
 var app = builder.Build();
 app.Run();

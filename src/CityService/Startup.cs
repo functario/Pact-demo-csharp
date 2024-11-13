@@ -1,4 +1,5 @@
 ﻿using CityService.Repositories;
+using dotenv.net;
 using MinimalApi.Endpoint.Extensions;
 using ServiceDefaults;
 
@@ -21,14 +22,15 @@ public class Startup
         // Aspire
         builder.AddServiceDefaults();
 
-        // Add services to the container.
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-
         builder.Logging.ClearProviders();
 
-        // Register Services
+        // Load appsettings and environment variables.
+        DotEnv.Fluent().WithTrimValues().Load();
+        builder
+            .Configuration.AddJsonFile($"appsettings.json", optional: false)
+            .AddEnvironmentVariables();
+
+        // Register and Configure Services
         builder.Host.ConfigureServices(
             (context, services) => services.AddCityService(context, injectedCityRepository)
         );
@@ -45,6 +47,13 @@ public class Startup
         app.UseHttpsRedirection();
         app.MapEndpoints();
         app.MapDefaultEndpoints();
+        app.UseExceptionHandler();
+
+        // Middlewares
+        // Todo: app.UseCors();
+        app.UseAuthentication();
+        app.UseAuthorization();
+
         return app;
     }
 }

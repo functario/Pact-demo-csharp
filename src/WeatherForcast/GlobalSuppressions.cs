@@ -23,3 +23,10 @@ using System.Diagnostics.CodeAnalysis;
     "IDE0290:Use primary constructor",
     Justification = "Use explicit and readonly field"
 )]
+[assembly: SuppressMessage(
+    "Performance",
+    "CA1812:Avoid uninstantiated internal classes",
+    Justification = "Is used at run time",
+    Scope = "type",
+    Target = "~T:WeatherForcast.GlobalExceptionHandler"
+)]

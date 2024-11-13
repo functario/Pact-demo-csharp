@@ -8,6 +8,7 @@ using PactReferences;
 using PactReferences.ProviderStates;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.CityService.V1.DTOs;
+using WeatherForcastContractTests.Fixtures.AuthenticationServiceFixtures;
 using WeatherForcastContractTests.Fixtures.CityServiceFixtures;
 using Xunit.Abstractions;
 
@@ -45,6 +46,11 @@ public class GetCitiesTests
     public async Task GetCities_WhenSomeCitiesExist_ReturnsSomeCities()
     {
         // Arrange
+        var tokenMatch = Match.Regex(
+            $"Bearer {AuthenticationFixtures.ValidOldToken}",
+            "^Bearer\\s+([A-Za-z0-9\\-\\._~\\+\\/]+=*)$"
+        );
+
         var expectedResponse = new GetCitiesResponse(CityFixtures.SetOf3Cities);
         // Body returns by API is lowerCase.
         var expectedBody = expectedResponse.ToLowerDynamic(_demoJsonSerializerOptions);
@@ -54,6 +60,7 @@ public class GetCitiesTests
                 .Given(CityServiceStates.SomeCitiesExist.State)
                 .WithRequest(HttpMethod.Get, $"/{_cityServiceClient.EndPoint}")
                 .WithHeader("Accept", "application/json")
+                .WithHeader("Authorization", tokenMatch)
             .WillRespond()
                 .WithStatus(HttpStatusCode.OK)
                 .WithHeader("Content-Type", "application/json; charset=utf-8")

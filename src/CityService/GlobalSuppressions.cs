@@ -29,3 +29,10 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "namespaceanddescendants",
     Target = "~N:CityService.Repositories"
 )]
+[assembly: SuppressMessage(
+    "Performance",
+    "CA1812:Avoid uninstantiated internal classes",
+    Justification = "Is used at run time",
+    Scope = "type",
+    Target = "~T:CityService.GlobalExceptionHandler"
+)]
