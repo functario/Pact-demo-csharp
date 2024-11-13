@@ -66,6 +66,7 @@ public sealed class GetForcastEndPoint : IEndpoint<IResult, HttpContext, Cancell
             forcasts.Add(new Forcast(city.Name, validTemperature, Units.Celsius));
         }
 
-        return await Task.FromResult(TypedResults.Ok(forcasts));
+        var response = new GetForcastResponse(forcasts);
+        return TypedResults.Ok(response);
     }
 }
