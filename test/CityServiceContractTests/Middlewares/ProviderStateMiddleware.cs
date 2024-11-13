@@ -50,8 +50,6 @@ public sealed class ProviderStateMiddleware
         {
             await _next(context);
         }
-
-        await _next(context);
     }
 
     private void Create3Cities()

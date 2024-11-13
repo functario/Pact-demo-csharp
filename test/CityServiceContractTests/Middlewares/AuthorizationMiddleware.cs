@@ -23,8 +23,10 @@ public class AuthorizationMiddleware
         {
             AuthorizationHeader(context.Request);
         }
-
-        await _next(context);
+        else
+        {
+            await _next(context);
+        }
     }
 
     private void AuthorizationHeader(HttpRequest request)
