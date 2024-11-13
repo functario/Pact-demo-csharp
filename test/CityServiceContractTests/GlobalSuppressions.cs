@@ -36,3 +36,17 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "type",
     Target = "~T:CityServiceContractTests.Middlewares.FakeCityRepository"
 )]
+[assembly: SuppressMessage(
+    "Design",
+    "CA1052:Static holder types should be Static or NotInheritable",
+    Justification = "Load at runtime",
+    Scope = "type",
+    Target = "~T:CityServiceContractTests.TestsConfigurations.CityServiceContractTestsCollection"
+)]
+[assembly: SuppressMessage(
+    "Naming",
+    "CA1711:Identifiers should not have incorrect suffix",
+    Justification = "Part of xunit DSL",
+    Scope = "type",
+    Target = "~T:CityServiceContractTests.TestsConfigurations.CityServiceContractTestsCollection"
+)]

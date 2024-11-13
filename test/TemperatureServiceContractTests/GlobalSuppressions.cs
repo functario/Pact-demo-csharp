@@ -22,3 +22,17 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "namespaceanddescendants",
     Target = "~N:TemperatureServiceContractTests.V1"
 )]
+[assembly: SuppressMessage(
+    "Design",
+    "CA1052:Static holder types should be Static or NotInheritable",
+    Justification = "Load at runtime",
+    Scope = "type",
+    Target = "~T:TemperatureServiceContractTests.TestsConfigurations.TemperatureServiceContractTestsCollection"
+)]
+[assembly: SuppressMessage(
+    "Naming",
+    "CA1711:Identifiers should not have incorrect suffix",
+    Justification = "Part of xunit DSL",
+    Scope = "type",
+    Target = "~T:TemperatureServiceContractTests.TestsConfigurations.TemperatureServiceContractTestsCollection"
+)]
