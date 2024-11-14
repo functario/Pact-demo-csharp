@@ -1,7 +1,9 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using CityService.Autenthication;
 using CityService.Repositories;
 using DemoConfigurations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MinimalApi.Endpoint.Extensions;
@@ -93,14 +95,35 @@ public static class ServiceCollectionExtensions
                     IssuerSigningKey = securityKey,
                 };
             });
-
         return services;
     }
 
-    internal static IServiceCollection AddAuthorizationCustom(this IServiceCollection services)
+    internal static IServiceCollection AddAuthorizationCustom(
+        this IServiceCollection services,
+        params NamedAuthorizationPolicy[] nameAuthorizationPolicies
+    )
     {
-        services.AddAuthorization();
-        return services;
+        if (nameAuthorizationPolicies.IsNullOrEmpty())
+        {
+            services.AddAuthorization(x => AddPolicies(x, nameAuthorizationPolicies));
+        }
+
+        // Default
+        return services.AddAuthorization();
+    }
+
+    private static void AddPolicies(
+        AuthorizationOptions authorizationOptions,
+        NamedAuthorizationPolicy[] nameAuthorizationPolicies
+    )
+    {
+        foreach (var nameAuthorizationPolicy in nameAuthorizationPolicies)
+        {
+            authorizationOptions.AddPolicy(
+                nameAuthorizationPolicy.Name,
+                nameAuthorizationPolicy.Policy
+            );
+        }
     }
 
     internal static IServiceCollection AddRepositories(
