@@ -1,9 +1,11 @@
 ﻿using CityService;
-using CityService.Autenthication;
+using CityService.Authentications;
 using CityService.Repositories;
 using CityServiceContractTests.Middlewares;
+using DemoConfigurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PactReferences;
@@ -19,22 +21,21 @@ internal static class ServiceCollectionExtensions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
-        return services.AddCityService().AddPactReferences(context);
+        return services.AddPactReferences(context).AddCityService(context);
     }
 
-    public static IServiceCollection AddCityService(this IServiceCollection services)
+    public static IServiceCollection AddCityService(
+        this IServiceCollection services,
+        HostBuilderContext context
+    )
     {
-        services.AddScoped<ICityRepository>(_ => new FakeCityRepository());
+        // repository use for testing with Pact States
+        var fakeRepository = new FakeCityRepository();
+        services.AddScoped<ICityRepository>(_ => fakeRepository);
 
-        var startupOptions = new StartupOptions(
-            services.BuildServiceProvider().GetRequiredService<ICityRepository>(),
-            [
-                new NamedAuthorizationPolicy(
-                    "test",
-                    policy => policy.RequireAssertion(context => true)
-                )
-            ]
-        );
+        var disableAuthorizationPolicy = GetDemoCityAuthorizationPolicy(context);
+
+        var startupOptions = new StartupOptions(fakeRepository, disableAuthorizationPolicy);
 
         var server = CityServiceStartup.WebApp([], startupOptions);
 
@@ -45,5 +46,24 @@ internal static class ServiceCollectionExtensions
         //server.UseMiddleware<AuthorizationMiddleware>();
         server.Start();
         return services.AddActivatedKeyedSingleton(Participants.CityService, (_, _) => server);
+    }
+
+    private static CityAuthorizationPolicy? GetDemoCityAuthorizationPolicy(
+        HostBuilderContext context
+    )
+    {
+        var disableCityServiceAuthorization = context.Configuration.GetValue<bool>(
+            EnvironmentVars.PACTDEMO_DISABLE_CITYSERVICE_AUTHORIZATION
+        );
+
+        if (disableCityServiceAuthorization)
+        {
+            return new CityAuthorizationPolicy(
+                "testcitypolicy",
+                policy => policy.RequireAssertion(context => true)
+            );
+        }
+
+        return null;
     }
 }

@@ -26,12 +26,16 @@ public class GetCitiesTests
     )
     {
         ArgumentNullException.ThrowIfNull(pactConfigHelper, nameof(pactConfigHelper));
+        ArgumentNullException.ThrowIfNull(output, nameof(output));
 
         // Initialize Rust backend
         _pactDir = pactConfigHelper.GetPactDir();
         _config = pactConfigHelper.GetPactVerifierConfig(output);
         _cityService = cityService;
         _demoConfiguration = demoConfiguration;
+        output.WriteLine(
+            $"DisableCityServiceAuthorization: {_demoConfiguration.DisableCityServiceAuthorization}"
+        );
     }
 
     [Fact]
@@ -41,11 +45,10 @@ public class GetCitiesTests
         using var pactVerifier = new PactVerifier(Participants.CityService, _config);
         var url = _cityService.Urls.Single();
 
-        // Generate a valid token
-        // The solution with AuthorizationMiddleware does not seems to work:
-        // https://github.com/pact-foundation/pact-workshop-dotnet?tab=readme-ov-file#step-9---implement-authorization-on-the-provider
-
-        var token = TokenGenerator.GenerateToken(_demoConfiguration.AuthenticationKey);
+        // if true, an inert AuthorizationPolicy has been injected in DI bypassing contacting AuthenticationService. Otherwise use the default policy of CityService.
+        var token = _demoConfiguration.DisableCityServiceAuthorization
+            ? "fakeToken"
+            : TokenGenerator.GenerateToken(_demoConfiguration.AuthenticationKey);
 
         // Act, Assert
         pactVerifier

@@ -1,7 +1,7 @@
 ﻿using MinimalApi.Endpoint;
+using WeatherForcast.APIConfigs;
 using WeatherForcast.Clients.CityService.V1;
 using WeatherForcast.Clients.TemperatureService.V1;
-using WeatherForcast.Routes;
 using WeatherForcast.V1.Forcasts.Models;
 
 namespace WeatherForcast.V1.Forcasts.GetForcast;

@@ -18,4 +18,6 @@ public class DemoOptions
 
     [Required(AllowEmptyStrings = false, ErrorMessage = $"{nameof(PactLogLevel)} is required")]
     public PactLogLevel PactLogLevel { get; set; }
+
+    public bool DisableCityServiceAuthorization { get; set; }
 }

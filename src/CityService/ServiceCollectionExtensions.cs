@@ -1,9 +1,8 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using CityService.Autenthication;
+using CityService.Authentications;
 using CityService.Repositories;
 using DemoConfigurations;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MinimalApi.Endpoint.Extensions;
@@ -28,7 +27,9 @@ public static class ServiceCollectionExtensions
             .AddDemoConfigurations(context)
             .AddSwagger();
 
-        services.AddAuthenticationCustom().AddAuthorizationCustom();
+        services
+            .AddAuthenticationCustom()
+            .AddAuthorizationCustom(startupOptions?.InjectedCityAuthorizationPolicy);
         return services;
     }
 
@@ -100,30 +101,21 @@ public static class ServiceCollectionExtensions
 
     internal static IServiceCollection AddAuthorizationCustom(
         this IServiceCollection services,
-        params NamedAuthorizationPolicy[] nameAuthorizationPolicies
+        CityAuthorizationPolicy? cityAuthorizationPolicy
     )
     {
-        if (nameAuthorizationPolicies is not null && nameAuthorizationPolicies.Length > 0)
+        if (cityAuthorizationPolicy is not null)
         {
-            services.AddAuthorization(x => AddPolicies(x, nameAuthorizationPolicies));
+            var policyName = cityAuthorizationPolicy.Name;
+            var policyBuilder = cityAuthorizationPolicy.PolicyBuilder;
+            services.AddKeyedSingleton(PolicyNames.KeyedServiceName, new PolicyNames(policyName));
+            return services.AddAuthorization(x => x.AddPolicy(policyName, policyBuilder));
         }
 
         // Default
-        return services.AddAuthorization();
-    }
+        services.AddKeyedSingleton(PolicyNames.KeyedServiceName, new PolicyNames());
 
-    private static void AddPolicies(
-        AuthorizationOptions authorizationOptions,
-        NamedAuthorizationPolicy[] nameAuthorizationPolicies
-    )
-    {
-        foreach (var nameAuthorizationPolicy in nameAuthorizationPolicies)
-        {
-            authorizationOptions.AddPolicy(
-                nameAuthorizationPolicy.Name,
-                nameAuthorizationPolicy.PolicyBuilder
-            );
-        }
+        return services.AddAuthorization();
     }
 
     internal static IServiceCollection AddRepositories(

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace CityService.Autenthication;
+namespace CityService.Authentications;
 
-public readonly record struct NamedAuthorizationPolicy(
+public sealed record CityAuthorizationPolicy(
     string Name,
     Action<AuthorizationPolicyBuilder> PolicyBuilder
 ) { }

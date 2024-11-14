@@ -32,9 +32,11 @@ public static class ServiceCollectionExtensions
                 var authenticationKey = configuration.GetValue<string>(
                     EnvironmentVars.PACTDEMO_AUTHENTICATIONKEY
                 );
+
                 var pactFolder = configuration.GetValue<string?>(
                     EnvironmentVars.PACTDEMO_PACTFOLDER
                 );
+
                 ArgumentException.ThrowIfNullOrEmpty(authenticationKey);
                 ArgumentException.ThrowIfNullOrEmpty(pactFolder);
 
@@ -43,6 +45,10 @@ public static class ServiceCollectionExtensions
                 x.PactFolder = pactFolder;
                 x.PactLogLevel = configuration.GetValue<PactLogLevel>(
                     EnvironmentVars.PACTDEMO_PACTLOGLEVEL
+                );
+
+                x.DisableCityServiceAuthorization = configuration.GetValue<bool>(
+                    EnvironmentVars.PACTDEMO_DISABLE_CITYSERVICE_AUTHORIZATION
                 );
             })
             .ValidateOnStart();
