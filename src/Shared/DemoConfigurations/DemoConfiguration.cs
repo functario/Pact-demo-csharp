@@ -12,6 +12,7 @@ public sealed class DemoConfiguration
     private readonly PactLogLevel _pactLogLevel;
     private readonly string _pactFolder;
     private readonly string _authenticationKey;
+    private readonly bool _disableCityServiceAuthorization;
 
     public DemoConfiguration(IOptionsMonitor<DemoOptions> options)
     {
@@ -20,6 +21,7 @@ public sealed class DemoConfiguration
         var authenticationKey = options.CurrentValue.AuthenticationKey;
         var demoCase = options.CurrentValue.DemoCase;
         var pactLogLevel = options.CurrentValue.PactLogLevel;
+        var disableCityServiceAuthorization = options.CurrentValue.DisableCityServiceAuthorization;
         ArgumentException.ThrowIfNullOrWhiteSpace(pactFolder, EnvironmentVars.PACTDEMO_PACTFOLDER);
         ArgumentException.ThrowIfNullOrWhiteSpace(
             authenticationKey,
@@ -30,11 +32,13 @@ public sealed class DemoConfiguration
         _authenticationKey = authenticationKey;
         _demoCase = demoCase;
         _pactLogLevel = pactLogLevel;
+        _disableCityServiceAuthorization = disableCityServiceAuthorization;
     }
 
     public PactLogLevel PactLogLevel => _pactLogLevel;
     public string PactFolder => _pactFolder;
     public string AuthenticationKey => _authenticationKey;
+    public bool DisableCityServiceAuthorization => _disableCityServiceAuthorization;
 
     public JsonSerializerOptions GetJsonSerializerOptions()
     {

@@ -1,4 +1,4 @@
-﻿namespace WeatherForcast.Routes;
+﻿namespace WeatherForcast.APIConfigs;
 
 public static class EndPointRoutes
 {

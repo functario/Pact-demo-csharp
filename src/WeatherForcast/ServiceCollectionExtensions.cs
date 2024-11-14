@@ -106,8 +106,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddAuthorizationCustom(this IServiceCollection services)
     {
-        services.AddAuthorization();
-        return services;
+        return services.AddAuthorization();
     }
 
     public static void AddSwagger(this IServiceCollection services)

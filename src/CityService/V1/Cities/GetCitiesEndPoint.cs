@@ -1,5 +1,6 @@
-﻿using CityService.Repositories;
-using CityService.Routes;
+﻿using CityService.APIConfigs;
+using CityService.Authentications;
+using CityService.Repositories;
 using MinimalApi.Endpoint;
 
 namespace CityService.V1.Cities;
@@ -7,10 +8,15 @@ namespace CityService.V1.Cities;
 public sealed class GetCitiesEndpoint : IEndpoint<IResult, CancellationToken>
 {
     private readonly ICityRepository _cityRepository;
+    private readonly PolicyNames _policyNames;
 
-    public GetCitiesEndpoint(ICityRepository cityRepository)
+    public GetCitiesEndpoint(
+        ICityRepository cityRepository,
+        [FromKeyedServices(PolicyNames.KeyedServiceName)] PolicyNames policyNames
+    )
     {
         _cityRepository = cityRepository;
+        _policyNames = policyNames;
     }
 
     public void AddRoute(IEndpointRouteBuilder app)
@@ -26,7 +32,7 @@ public sealed class GetCitiesEndpoint : IEndpoint<IResult, CancellationToken>
             .WithName(EndPointRoutes.Cities)
             .WithOpenApi()
             .WithTags(EndPointRoutes.Cities)
-            .RequireAuthorization()
+            .RequireAuthorization(_policyNames.Names)
             .Produces(StatusCodes.Status200OK, typeof(GetCitiesResponse));
         ;
     }

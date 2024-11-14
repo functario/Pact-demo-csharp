@@ -1,5 +1,4 @@
-﻿using CityService.Repositories;
-using dotenv.net;
+﻿using dotenv.net;
 using MinimalApi.Endpoint.Extensions;
 using ServiceDefaults;
 
@@ -12,10 +11,7 @@ namespace CityService;
 )]
 public class Startup
 {
-    public static WebApplication WebApp(
-        string[] args,
-        ICityRepository? injectedCityRepository = null
-    )
+    public static WebApplication WebApp(string[] args, StartupOptions? startupOptions = null)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +28,7 @@ public class Startup
 
         // Register and Configure Services
         builder.Host.ConfigureServices(
-            (context, services) => services.AddCityService(context, injectedCityRepository)
+            (context, services) => services.AddCityService(context, startupOptions)
         );
 
         var app = builder.Build();

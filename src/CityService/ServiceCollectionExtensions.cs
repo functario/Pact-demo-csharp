@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using CityService.Authentications;
 using CityService.Repositories;
 using DemoConfigurations;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +14,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCityService(
         this IServiceCollection services,
         HostBuilderContext context,
-        ICityRepository? injectedCityRepository
+        StartupOptions? startupOptions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
@@ -22,11 +23,13 @@ public static class ServiceCollectionExtensions
             .AddExceptionHandler<GlobalExceptionHandler>()
             .AddProblemDetails()
             .AddMinimalApi()
-            .AddRepositories(injectedCityRepository)
+            .AddRepositories(startupOptions?.InjectedCityRepository)
             .AddDemoConfigurations(context)
             .AddSwagger();
 
-        services.AddAuthenticationCustom().AddAuthorizationCustom();
+        services
+            .AddAuthenticationCustom()
+            .AddAuthorizationCustom(startupOptions?.InjectedCityAuthorizationPolicy);
         return services;
     }
 
@@ -93,14 +96,26 @@ public static class ServiceCollectionExtensions
                     IssuerSigningKey = securityKey,
                 };
             });
-
         return services;
     }
 
-    internal static IServiceCollection AddAuthorizationCustom(this IServiceCollection services)
+    internal static IServiceCollection AddAuthorizationCustom(
+        this IServiceCollection services,
+        CityAuthorizationPolicy? cityAuthorizationPolicy
+    )
     {
-        services.AddAuthorization();
-        return services;
+        if (cityAuthorizationPolicy is not null)
+        {
+            var policyName = cityAuthorizationPolicy.Name;
+            var policyBuilder = cityAuthorizationPolicy.PolicyBuilder;
+            services.AddKeyedSingleton(PolicyNames.KeyedServiceName, new PolicyNames(policyName));
+            return services.AddAuthorization(x => x.AddPolicy(policyName, policyBuilder));
+        }
+
+        // Default
+        services.AddKeyedSingleton(PolicyNames.KeyedServiceName, new PolicyNames());
+
+        return services.AddAuthorization();
     }
 
     internal static IServiceCollection AddRepositories(

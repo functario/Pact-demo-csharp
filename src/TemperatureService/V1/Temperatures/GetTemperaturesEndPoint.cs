@@ -1,6 +1,6 @@
 ﻿using MinimalApi.Endpoint;
+using TemperatureService.APIConfigs;
 using TemperatureService.Repositories;
-using TemperatureService.Routes;
 
 namespace TemperatureService.V1.Temperatures;
 
