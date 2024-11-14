@@ -2,4 +2,7 @@
 
 namespace CityService.Autenthication;
 
-public readonly record struct NamedAuthorizationPolicy(string Name, AuthorizationPolicy Policy) { }
+public readonly record struct NamedAuthorizationPolicy(
+    string Name,
+    Action<AuthorizationPolicyBuilder> PolicyBuilder
+) { }

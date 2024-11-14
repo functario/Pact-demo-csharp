@@ -1,4 +1,5 @@
 ﻿using CityService;
+using CityService.Autenthication;
 using CityService.Repositories;
 using CityServiceContractTests.Middlewares;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,13 @@ internal static class ServiceCollectionExtensions
         services.AddScoped<ICityRepository>(_ => new FakeCityRepository());
 
         var startupOptions = new StartupOptions(
-            services.BuildServiceProvider().GetRequiredService<ICityRepository>()
+            services.BuildServiceProvider().GetRequiredService<ICityRepository>(),
+            [
+                new NamedAuthorizationPolicy(
+                    "test",
+                    policy => policy.RequireAssertion(context => true)
+                )
+            ]
         );
 
         var server = CityServiceStartup.WebApp([], startupOptions);

@@ -121,7 +121,7 @@ public static class ServiceCollectionExtensions
         {
             authorizationOptions.AddPolicy(
                 nameAuthorizationPolicy.Name,
-                nameAuthorizationPolicy.Policy
+                nameAuthorizationPolicy.PolicyBuilder
             );
         }
     }
