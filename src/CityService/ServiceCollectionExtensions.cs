@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCityService(
         this IServiceCollection services,
         HostBuilderContext context,
-        ICityRepository? injectedCityRepository
+        StartupOptions? startupOptions
     )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
             .AddExceptionHandler<GlobalExceptionHandler>()
             .AddProblemDetails()
             .AddMinimalApi()
-            .AddRepositories(injectedCityRepository)
+            .AddRepositories(startupOptions?.InjectedCityRepository)
             .AddDemoConfigurations(context)
             .AddSwagger();
 
@@ -103,7 +103,7 @@ public static class ServiceCollectionExtensions
         params NamedAuthorizationPolicy[] nameAuthorizationPolicies
     )
     {
-        if (nameAuthorizationPolicies.IsNullOrEmpty())
+        if (nameAuthorizationPolicies is not null && nameAuthorizationPolicies.Length > 0)
         {
             services.AddAuthorization(x => AddPolicies(x, nameAuthorizationPolicies));
         }
